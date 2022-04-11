@@ -17,6 +17,7 @@ AFRAME.registerComponent('snakebody', {
               scene.appendChild(point);
               }
         this.el.addEventListener('onload', this.addSnake);
+
     },
 
     update: function () {
@@ -35,90 +36,125 @@ AFRAME.registerComponent('snakebody', {
 
 AFRAME.registerComponent("mvmt", {
   schema: {
-    orbit: {type: 'selector', default: 'gameworld'}
+    orbit: {type: 'selector', default: 'gameworld'},
+    movement: {type: 'number', default: 0.05}
   },
 
   init: function() {
     let el = this.el;
     let data = this.data;
 
+    this.tick = AFRAME.utils.throttleTick(this.tick, 500, this);
+
     document.addEventListener('keyup', event => {
       if (event.code === 'Space') {
         console.log('Space pressed'); //whatever you want to do when space is pressed
+
+        // 180 degree movement and material
+        el.object3D.rotation.z -= Math.PI;
       } 
     })
-
   },
 
-  update: function () {
-   
+  update: function (oldData) {
     let el = this.el;
     let data = this.data;
 
     const moveZ = 0.1;
 
-    //remember to clamp the movement variable to 2*PI max
-    const movement = 0.05;
+    const sceneEl = document.querySelector('a-scene');
+    const worldHeight = sceneEl.querySelector('#gameworld').getAttribute('height') ;
 
     //Arrow Key Movement
     document.addEventListener('keydown', event => {
      
       if (event.code === 'ArrowLeft') {
-        //data.orbit.object3D.rotation.y += movement; 
-
-        //rotate sphere counter-clockwise
-        el.object3D.rotation.z += movement
-        console.log(el.object3D.rotation.z)
-
+        //rotate snake counter-clockwise
+        el.object3D.rotation.z += data.movement;  
       }
       if (event.code === 'ArrowRight') {
-        //data.orbit.object3D.rotation.y -= movement;
-
-        //rotate sphere clockwise
-        el.object3D.rotation.z -= movement
+        //rotate snake clockwise
+        el.object3D.rotation.z -= data.movement
       }
-      
-      if (event.code ===  'ArrowUp') {
-        data.orbit.object3D.position.y += movement; 
-        // if snake reaches top of gameworld
 
-        if (data.orbit.object3D.position.y >= 0.490 ) {
+      //wrapping around top edge code
+      //This does work but need to ensure old data is not being read
+      if (data.orbit.object3D.position.y >= worldHeight ) {
 
-          if (data.orbit.object3D.position.z >= 0 )
-          {
-            data.orbit.object3D.position.z-= moveZ;
-          }
-          else
-          {
-            data.orbit.object3D.position.z+= moveZ;
-          }
+          console.log(data.orbit.object3D.position.y)
+        //if inside inner cylinder
+        if (data.orbit.object3D.position.z >= 0 )
+        {
+          data.orbit.object3D.position.z-= moveZ;
+         el.object3D.rotation.z -= Math.PI;
         }
-
-      }
-      if (event.code === 'ArrowDown') {
-        data.orbit.object3D.position.y -= movement; 
-
-        // if snake reaches bottom of gameworld
-        if (data.orbit.object3D.position.y <= -0.490 ) {
-
-          if (data.orbit.object3D.position.z >= 0 )
-          {
-            data.orbit.object3D.position.z-= moveZ;
-          }
-          else
-          {
-            data.orbit.object3D.position.z+= moveZ;
-          }
+        else
+        {
+          data.orbit.object3D.position.z+= moveZ;
+          el.object3D.rotation.z -= Math.PI;
         }
       }
-      
+
+      //wrapping around bottom edge code
+      if (data.orbit.object3D.position.y <= -worldHeight ) {
+
+        if (data.orbit.object3D.position.z >= 0 )
+        {
+          data.orbit.object3D.position.z-= moveZ;
+        }
+        else
+        {
+          data.orbit.object3D.position.z+= moveZ;
+        }
+      }
+
     })
+
+  },
+
+  tick: function  (t, dt) {
+
+    let el = this.el;
+    let data = this.data;
+    
+    let angle = (el.object3D.rotation.z)
+    const moveZ = 0.1;
+ 
+    //clamp number
+    const min = -0.5;
+    const max = 0.5;
+
+    const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+    //horizontal movement
+    data.orbit.object3D.rotation.y -= data.movement * Math.cos(angle);
+
+    //vertical movement clamped at top and bottom
+    data.orbit.object3D.position.y += data.movement * Math.sin(angle); 
+    data.orbit.object3D.position.y = clamp(data.orbit.object3D.position.y, min, max);
+
+    console.log(data.orbit.object3D.position.y)
+
+          //wrapping around top edge code
+      //This does work but need to ensure old data is not being read
+      if (data.orbit.object3D.position.y >= max ) {
+
+        console.log(data.orbit.object3D.position.y)
+      //if inside inner cylinder
+      if (data.orbit.object3D.position.z >= 0 )
+      {
+        data.orbit.object3D.position.z-= moveZ;
+       el.object3D.rotation.z -= Math.PI;
+      }
+      else
+      {
+        data.orbit.object3D.position.z+= moveZ;
+        el.object3D.rotation.z -= Math.PI;
+      }
+    }
+
+
 
   }
 
 });
-
-
-function innerOuterBorder() {
-  
-};
