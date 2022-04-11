@@ -57,7 +57,7 @@ AFRAME.registerComponent("mvmt", {
 
     const moveZ = 0.1;
 
-    //remember to clamp the movement variable to 2*PI
+    //remember to clamp the movement variable to 2*PI max
     const movement = 0.05;
 
     //Arrow Key Movement
