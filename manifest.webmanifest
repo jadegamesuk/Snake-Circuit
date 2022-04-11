@@ -1,0 +1,20 @@
+{
+  "name": "Test1 Template",
+  "display": "standalone",
+  "short_name": "Test1",
+  "start_url": "https://hopeful-fermi-8a5d12.netlify.app",
+  "scope": ".",
+  "ovr_package_name":"com.jadegames.template",
+  "description": "Progressive Web Application Template by JadeGames",
+
+  "theme_color": "#FF0000",
+  "background_color": "#FF0000",
+  "icons": [
+    {
+      "src": "/img/icons/android-icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}

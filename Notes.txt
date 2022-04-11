@@ -1,0 +1,5 @@
+
+wine /home/efe/Android/ovr-platform-util-pwa/ovr-platform-util.exe create-pwa -o Template.apk --android-sdk /home/efe/Android/mac/android-11/ --manifest-content-file manifest.webmanifest
+
+wine /home/efe/Android/ovr-platform-util-pwa/ovr-platform-util.exe create-pwa -o Template.apk --android-sdk /home/efe/Android/mac/android-11/ --web-manifest-url https://hopeful-fermi-8a5d12.netlify.app/manifest.webmanifest
+
