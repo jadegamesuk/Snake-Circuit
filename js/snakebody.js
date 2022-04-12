@@ -45,15 +45,15 @@ AFRAME.registerComponent("mvmt", {
     let el = this.el;
     let data = this.data;
 
-    this.tick = AFRAME.utils.throttleTick(this.tick, 1, this);
+    this.tick = AFRAME.utils.throttleTick(this.tick, 5, this);
 
     document.addEventListener('keyup', event => {
       if (event.code === 'Space') {
-        console.log('Space pressed'); //whatever you want to do when space is pressed
+        console.log('Space Bar pressed'); //whatever you want to do when space is pressed
 
         // 180 degree movement and material
         //el.object3D.rotation.z -= Math.PI;
-        console.log(el.object3D.rotation.z)
+        //console.log(el.object3D.position.x);
       } 
     })
   },
@@ -82,21 +82,8 @@ AFRAME.registerComponent("mvmt", {
       }
       if (event.code === 'ArrowRight') {
         //rotate snake clockwise
-        el.object3D.rotation.z -= data.rotateSpeed
+        el.object3D.rotation.z -= data.rotateSpeed;
         el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max;
-      }
-
-      //wrapping around bottom edge code
-      if (data.orbit.object3D.position.y <= -worldHeight ) {
-
-        if (data.orbit.object3D.position.z >= 0 )
-        {
-          data.orbit.object3D.position.z-= moveZ;
-        }
-        else
-        {
-          data.orbit.object3D.position.z+= moveZ;
-        }
       }
 
     })
@@ -109,7 +96,7 @@ AFRAME.registerComponent("mvmt", {
     let data = this.data;
     
     let angle = (el.object3D.rotation.z)
-    const moveZ = 0.1;
+    const moveZ = 0.2;
  
     //clamp number
     const min = -0.5;
@@ -128,14 +115,13 @@ AFRAME.registerComponent("mvmt", {
     //wrapping around top edge code
       if (data.orbit.object3D.position.y >= max ) {
 
-        console.log(data.orbit.object3D.position.y)
+        //console.log(data.orbit.object3D.position.y)
       //if inside inner cylinder
       if (data.orbit.object3D.position.z >= 0 )
       {
-        //the below line doesn't work correctly.
-        //use the crawling-cursor script for ideas
-        //data.orbit.object3D.position.z-= moveZ;
-        
+        //the below line DOES work correctly!!!
+        el.object3D.position.z-= moveZ;  
+         
         el.object3D.rotation.z = -el.object3D.rotation.z
         el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
       } 
@@ -144,12 +130,33 @@ AFRAME.registerComponent("mvmt", {
         //the below line doesn't work correctly.
         //use the crawling-cursor script for ideas
         //data.orbit.object3D.position.z+= moveZ;
+        //el.object3D.position.z+= moveZ;
         el.object3D.rotation.z = -el.object3D.rotation.z
         el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
-
       }
     }
 
-  }
+   //wrapping around bottom edge code
+   if (data.orbit.object3D.position.y <= min ) {
+
+      //console.log(data.orbit.object3D.position.y)
+    //if  NOT inside cylinder
+    if (data.orbit.object3D.position.z >= 0 )
+    {
+      //the below line doesn't work correctly.
+      //use the crawling-cursor script for ideas
+      //el.object3D.position.z-= moveZ;  
+      el.object3D.rotation.z = -el.object3D.rotation.z
+      el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
+    } 
+    else
+    {
+      //the below line doesn't work correctly.
+      //use the crawling-cursor script for ideas
+     // el.object3D.position.z+= moveZ;
+      el.object3D.rotation.z = -el.object3D.rotation.z
+      el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
+    }
+  }}
 
 });

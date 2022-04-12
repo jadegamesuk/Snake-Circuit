@@ -106,6 +106,9 @@
 	            var cursorPosition = new THREE.Vector3().subVectors(intersection.point, global_normal.multiplyScalar(data.offset));
 	            data.target.setAttribute("position", cursorPosition);
 
+				//console.log("intersect pos: " + cursorPosition.z);
+				//console.log("intersect.length " + intersection.point.z);
+
 	            function getNearestIntersection(intersections) {
 	                for (var i = 0, l = intersections.length; i < l; i++) {
 
