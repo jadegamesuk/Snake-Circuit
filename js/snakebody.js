@@ -51,12 +51,13 @@ AFRAME.registerComponent("mvmt", {
         console.log('Space pressed'); //whatever you want to do when space is pressed
 
         // 180 degree movement and material
-        el.object3D.rotation.z -= Math.PI;
+        //el.object3D.rotation.z -= Math.PI;
+        console.log(el.object3D.rotation.z)
       } 
     })
   },
 
-  update: function (oldData) {
+  update: function () {
     let el = this.el;
     let data = this.data;
 
@@ -68,31 +69,20 @@ AFRAME.registerComponent("mvmt", {
     //Arrow Key Movement
     document.addEventListener('keydown', event => {
      
+    //Modulo for rotation angles
+    const max = 2*Math.PI;
+
       if (event.code === 'ArrowLeft') {
         //rotate snake counter-clockwise
-        el.object3D.rotation.z += data.movement;  
+        el.object3D.rotation.z += data.movement;
+        el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
+
+        //console.log("clamped info: " + el.object3D.rotation.z)
       }
       if (event.code === 'ArrowRight') {
         //rotate snake clockwise
         el.object3D.rotation.z -= data.movement
-      }
-
-      //wrapping around top edge code
-      //This does work but need to ensure old data is not being read
-      if (data.orbit.object3D.position.y >= worldHeight ) {
-
-          console.log(data.orbit.object3D.position.y)
-        //if inside inner cylinder
-        if (data.orbit.object3D.position.z >= 0 )
-        {
-          data.orbit.object3D.position.z-= moveZ;
-         el.object3D.rotation.z -= Math.PI;
-        }
-        else
-        {
-          data.orbit.object3D.position.z+= moveZ;
-          el.object3D.rotation.z -= Math.PI;
-        }
+        el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max;
       }
 
       //wrapping around bottom edge code
@@ -124,6 +114,7 @@ AFRAME.registerComponent("mvmt", {
     const min = -0.5;
     const max = 0.5;
 
+    const radiansmax = 2*Math.PI;
     const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
     //horizontal movement
@@ -133,27 +124,47 @@ AFRAME.registerComponent("mvmt", {
     data.orbit.object3D.position.y += data.movement * Math.sin(angle); 
     data.orbit.object3D.position.y = clamp(data.orbit.object3D.position.y, min, max);
 
-    console.log(data.orbit.object3D.position.y)
-
-          //wrapping around top edge code
-      //This does work but need to ensure old data is not being read
+    //wrapping around top edge code
       if (data.orbit.object3D.position.y >= max ) {
 
         console.log(data.orbit.object3D.position.y)
       //if inside inner cylinder
       if (data.orbit.object3D.position.z >= 0 )
       {
-        data.orbit.object3D.position.z-= moveZ;
-       el.object3D.rotation.z -= Math.PI;
+        //the below line doesn't work correctly.
+        //use the crawling-cursor script for ideas
+        //data.orbit.object3D.position.z-= moveZ;
+
+        if (el.object3D.rotation.z <= Math.PI/2) {
+
+          //this doesn't quite work...
+          console.log("this is here")
+          let anglecheck2 = el.object3D.rotation.z - (Math.PI/2);
+          let anglecheck =  anglecheck2 + (el.object3D.rotation.z);
+          el.object3D.rotation.z = ((anglecheck % radiansmax ) + radiansmax) % radiansmax;
+
+        }
+        else{
+          el.object3D.rotation.z += Math.PI/2;
+          el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
+        }
       }
       else
       {
+        //the below line doesn't work correctly.
+        //use the crawling-cursor script for ideas
         data.orbit.object3D.position.z+= moveZ;
-        el.object3D.rotation.z -= Math.PI;
+        
+        if (el.object3D.rotation.z <= Math.PI/2) {
+          //el.object3D.rotation.z -= Math.PI/2;
+          el.object3D.rotation.z = el.object3D.rotation.z - Math.PI ;
+        }
+        else{
+          el.object3D.rotation.z += Math.PI/2;
+        }
+
       }
     }
-
-
 
   }
 
