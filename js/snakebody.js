@@ -37,14 +37,15 @@ AFRAME.registerComponent('snakebody', {
 AFRAME.registerComponent("mvmt", {
   schema: {
     orbit: {type: 'selector', default: 'gameworld'},
-    movement: {type: 'number', default: 0.05}
+    movement: {type: 'number', default: 0.02},
+    rotateSpeed: {type: 'number', default: 0.3}
   },
 
   init: function() {
     let el = this.el;
     let data = this.data;
 
-    this.tick = AFRAME.utils.throttleTick(this.tick, 500, this);
+    this.tick = AFRAME.utils.throttleTick(this.tick, 1, this);
 
     document.addEventListener('keyup', event => {
       if (event.code === 'Space') {
@@ -74,14 +75,14 @@ AFRAME.registerComponent("mvmt", {
 
       if (event.code === 'ArrowLeft') {
         //rotate snake counter-clockwise
-        el.object3D.rotation.z += data.movement;
+        el.object3D.rotation.z += data.rotateSpeed;
         el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
 
         //console.log("clamped info: " + el.object3D.rotation.z)
       }
       if (event.code === 'ArrowRight') {
         //rotate snake clockwise
-        el.object3D.rotation.z -= data.movement
+        el.object3D.rotation.z -= data.rotateSpeed
         el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max;
       }
 
@@ -134,34 +135,17 @@ AFRAME.registerComponent("mvmt", {
         //the below line doesn't work correctly.
         //use the crawling-cursor script for ideas
         //data.orbit.object3D.position.z-= moveZ;
-
-        if (el.object3D.rotation.z <= Math.PI/2) {
-
-          //this doesn't quite work...
-          console.log("this is here")
-          let anglecheck2 = el.object3D.rotation.z - (Math.PI/2);
-          let anglecheck =  anglecheck2 + (el.object3D.rotation.z);
-          el.object3D.rotation.z = ((anglecheck % radiansmax ) + radiansmax) % radiansmax;
-
-        }
-        else{
-          el.object3D.rotation.z += Math.PI/2;
-          el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
-        }
-      }
+        
+        el.object3D.rotation.z = -el.object3D.rotation.z
+        el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
+      } 
       else
       {
         //the below line doesn't work correctly.
         //use the crawling-cursor script for ideas
-        data.orbit.object3D.position.z+= moveZ;
-        
-        if (el.object3D.rotation.z <= Math.PI/2) {
-          //el.object3D.rotation.z -= Math.PI/2;
-          el.object3D.rotation.z = el.object3D.rotation.z - Math.PI ;
-        }
-        else{
-          el.object3D.rotation.z += Math.PI/2;
-        }
+        //data.orbit.object3D.position.z+= moveZ;
+        el.object3D.rotation.z = -el.object3D.rotation.z
+        el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
 
       }
     }
