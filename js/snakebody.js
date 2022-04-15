@@ -28,7 +28,7 @@ AFRAME.registerComponent('snakebody', {
       // Do something the component or its entity is detached.
     },
 
-    tick: function (time, timeDelta) {
+    tick: function (_time, _timeDelta) {
       // Do something on every scene tick or frame.
     }
 });
@@ -47,13 +47,19 @@ AFRAME.registerComponent("mvmt", {
 
     this.tick = AFRAME.utils.throttleTick(this.tick, 5, this);
 
+     //tracked controller
+     window.addEventListener("gamepadconnected", (event) => {
+      // console.log("A gamepad connected:");
+       //console.log(event.gamepad)[0];
+       });  
+     
+
     document.addEventListener('keyup', event => {
       if (event.code === 'Space') {
-        console.log('Space Bar pressed'); //whatever you want to do when space is pressed
-
+        console.log('Space Bar pressed'); 
         // 180 degree movement and material
         //el.object3D.rotation.z -= Math.PI;
-        //console.log(el.object3D.position.x);
+    
       } 
     })
   },
@@ -78,7 +84,12 @@ AFRAME.registerComponent("mvmt", {
         el.object3D.rotation.z += data.rotateSpeed;
         el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
 
-        //console.log("clamped info: " + el.object3D.rotation.z)
+
+        //let test = Object.values(navigator.getGamepads()[0].axes)[1]
+        //console.log(typeof test);
+        //console.log( navigator.getGamepads()[0].axes);
+        //console.log( Object.values(navigator.getGamepads()[0].axes)[1]);
+
       }
       if (event.code === 'ArrowRight') {
         //rotate snake clockwise
@@ -87,17 +98,49 @@ AFRAME.registerComponent("mvmt", {
       }
 
     })
-
   },
 
-  tick: function  (t, dt) {
+  tick: function  (_t, _dt) {
 
     let el = this.el;
     let data = this.data;
     
     let angle = (el.object3D.rotation.z)
     const moveZ = 0.2;
+
+    //Modulo for rotation angles
+    const maxRotation = 2*Math.PI;
+    const slowdown = 0.5;
+
  
+    //gamepad controller code   
+    if (navigator.getGamepads().hasOwnProperty("0") )
+    {
+       let test = Object.values(navigator.getGamepads()[0].axes)[1]
+       console.log(test);
+
+      //if Left is pressed
+      if (test == 1) {
+
+        //console.log("Left")
+        //rotate snake counter-clockwise
+        el.object3D.rotation.z += data.rotateSpeed * slowdown;
+        el.object3D.rotation.z = ((el.object3D.rotation.z % maxRotation) + maxRotation) % maxRotation; 
+
+      } 
+
+      //if Right is pressed
+      if (test == -1) {
+        //console.log("Right")
+        //rotate snake clockwise
+        el.object3D.rotation.z -= data.rotateSpeed * slowdown;
+        el.object3D.rotation.z = ((el.object3D.rotation.z % maxRotation) + maxRotation) % maxRotation; 
+      }
+      
+      
+      //console.log(navigator.getGamepads()[0].axes[1]);
+    }
+
     //clamp number
     const min = -0.5;
     const max = 0.5;
