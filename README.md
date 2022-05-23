@@ -3,7 +3,8 @@ Cloned from the boilerplate template to make this PWA compatible.
 
 ## To Do
 - ~Create environment and basic level~
-- Ensure a single sphere can move along cylinder correctly
+- ~Ensure a single sphere can move along cylinder correctly~
+- ~Ensure additional spheres can be created correctly~
 - Ensure additional spheres can also move correctly
 - Add controls via controller
 - Screen shake!
