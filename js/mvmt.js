@@ -15,18 +15,6 @@ AFRAME.registerComponent("mvmt", {
      //tracked controller
      window.addEventListener("gamepadconnected", (event) => {
        });  
-     
-
-    document.addEventListener('keyup', event => {
-      if (event.code === 'Space') {
-        //console.log('Space Bar pressed'); 
-        // 180 degree movement and material
-        //el.object3D.rotation.z -= Math.PI;
-        //console.log("Y Coordinate correct is:" + data.orbit.object3D.position.y)
-        //console.log("X")
-        //console.log(data.orbit.object3D.rotation.y)
-      } 
-    })
   },
 
   update: function () {
@@ -62,7 +50,7 @@ AFRAME.registerComponent("mvmt", {
     let data = this.data;
     
     let angle = (el.object3D.rotation.z)
-    const moveZ = 0.1;
+    const moveZ = 0.01;
 
     //Modulo for rotation angles
     const maxRotation = 2*Math.PI;

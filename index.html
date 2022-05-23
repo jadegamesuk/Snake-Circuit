@@ -26,8 +26,8 @@
 
 	</a-assets>
 
-	<a-camera wasd-controls-enabled="true"></a-camera>
-	<!-- <a-entity environment="preset: egypt; ground: flat"></a-entity> -->
+	<a-camera wasd-controls-enabled="false"></a-camera>
+	<a-entity environment="preset: egypt; ground: flat"></a-entity>
 
 	<!--material="opacity: 0.8; side: double; color: #F36601" -->
 	<!--src: #albedo; displacementMap: #height1
@@ -37,16 +37,18 @@
     <a-cylinder 
 		id="gameworld" position="0 1.6 0" open-ended="true" snakebody
 		radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
-		material=" src: #sand; opacity: 0.9; side: double;
-					repeat: 2 1"		
+		material=" src: #sand; opacity: 0.45; side: double;
+					repeat: 3 1"		
 		crawling-cursor="target: #snake"
 
 	></a-cylinder>
+
 		<a-entity id="player-wrapper">
-		<a-sphere 	id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: 248a-8266-Unknown Gamepad" 
+		 <a-sphere 	id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: 248a-8266-Unknown Gamepad" 
 					color="firebrick" radius="0.05" mvmt="orbit: #player-wrapper"
 					blending="none" material="src: #arrow; repeat: 2 1" snaketail="orbit: #player-wrapper">
-		</a-sphere>
+		</a-sphere> 
+
 		</a-entity>
 </a-scene>
 </body>
