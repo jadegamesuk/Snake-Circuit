@@ -4,5 +4,4 @@ wine /home/efe/Android/ovr-platform-util-pwa/ovr-platform-util.exe create-pwa -o
 wine /home/efe/Android/ovr-platform-util-pwa/ovr-platform-util.exe create-pwa -o Template.apk --android-sdk /home/efe/Android/mac/android-11/ --web-manifest-url https://hopeful-fermi-8a5d12.netlify.app/manifest.webmanifest
 
 caddy file-server --domain localhost
-
 caddy file-server --domain efe-lenovo-g510.local

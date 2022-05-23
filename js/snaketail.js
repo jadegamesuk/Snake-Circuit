@@ -27,6 +27,7 @@ AFRAME.registerComponent('snaketail', {
       document.addEventListener('keyup', event => {
         if (event.code === 'Space') {
 
+          
           let scene = document.querySelector('a-scene');
           //let pos = new THREE.Vector3( data.orbit.object3D.rotation.y, (data.zDist.object3D.position.y+data.orbit.object3D.position.y), el.object3D.position.z);
           let elthis = new THREE.Vector3( data.orbit.object3D.rotation.y, 1.6, el.object3D.position.z);
@@ -36,27 +37,20 @@ AFRAME.registerComponent('snaketail', {
               
               ballbody = document.createElement('a-sphere');
               
-              //ballbody.setAttribute('id', "SphereID" + data.bodyCount);
-              let newpos =  data.zDist.getAttribute("position")
+              //let newpos =  data.zDist.getAttribute("position")
+              var worldPosition = new THREE.Vector3();
+              el.object3D.getWorldPosition(worldPosition)
 
               ballbody.setAttribute('geometry', 'radius', 0.05)
-              ballbody.setAttribute('position',newpos);
-              ballbody.setAttribute('material','color','firebrick')
-              scene.appendChild(ballbody)
+              ballbody.setAttribute('position',worldPosition);
+              ballbody.setAttribute('material','color','Firebrick')
+              scene.appendChild(ballbody)                         
               
-              
-              
-              //console.log(pos)
-              data.bodyCount++; 
-              console.log("ballbody")
-              console.log( newpos)
-              console.log("ballbodyAttribute: ")
-              console.log( ballbody.object3D.position)
-              
-              console.log("snakehead")
-              console.log(data.zDist.getAttribute("position") );
+              data.bodyCount++;   
+                 
+              //console.log("World position")
+              //console.log(worldPosition);
           };
-
       })
     }
   });

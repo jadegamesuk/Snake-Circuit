@@ -44,10 +44,17 @@
 	></a-cylinder>
 
 		<a-entity id="player-wrapper">
-		 <a-sphere 	id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: 248a-8266-Unknown Gamepad" 
+
+			<a-sphere	id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: 248a-8266-Unknown Gamepad" 
+			color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90"
+			mvmt="orbit: #player-wrapper" blending="none" snaketail="orbit: #player-wrapper"></a-sphere>
+
+
+
+		<!-- <a-sphere 	id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: 248a-8266-Unknown Gamepad" 
 					color="firebrick" radius="0.05" mvmt="orbit: #player-wrapper"
-					blending="none" material="src: #arrow; repeat: 2 1" snaketail="orbit: #player-wrapper">
-		</a-sphere> 
+					blending="none" material="src: #arrow; repeat: 2 1" snaketail="orbit: #player-wrapper"> 
+		</a-sphere> -->
 
 		</a-entity>
 </a-scene>

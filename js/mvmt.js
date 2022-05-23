@@ -1,7 +1,7 @@
 AFRAME.registerComponent("mvmt", {
   schema: {
     orbit: {type: 'selector', default: '#gameworld'},
-    movement: {type: 'number', default: 0.02},
+    movement: {type: 'number', default: 0.01},
     rotateSpeed: {type: 'number', default: 0.3},
     innerWall: {type: 'boolean', default: true}
   },
@@ -50,7 +50,9 @@ AFRAME.registerComponent("mvmt", {
     let data = this.data;
     
     let angle = (el.object3D.rotation.z)
-    const moveZ = 0.01;
+    //let angle = 0
+    //console.log(angle)
+    const moveZ = 0.1;
 
     //Modulo for rotation angles
     const maxRotation = 2*Math.PI;
@@ -60,7 +62,7 @@ AFRAME.registerComponent("mvmt", {
     if (navigator.getGamepads().hasOwnProperty("0") )
     {
        let test = Object.values(navigator.getGamepads()[0].axes)[1]
-       console.log(test);
+       //console.log(test);
 
       //if Left is pressed
       if (test == 1) {
