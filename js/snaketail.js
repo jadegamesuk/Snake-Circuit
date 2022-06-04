@@ -1,3 +1,10 @@
+
+function delay(milliseconds){
+  return new Promise(resolve => {
+      setTimeout(resolve, milliseconds);
+  });
+}
+
 AFRAME.registerComponent('snaketail', {
     schema: {
       orbit: {type: 'selector', default: '#gameworld'},
@@ -6,9 +13,10 @@ AFRAME.registerComponent('snaketail', {
     }, 
 
     init: function () {
-        let el = this.el;
-        let data = this.data;
+        //let el = this.el;
+        //let data = this.data;
         this.tick = AFRAME.utils.throttleTick(this.tick, 5, this);
+        this.entities = document.querySelectorAll('a-sphere');
     },
 
     update: function () {
@@ -18,23 +26,49 @@ AFRAME.registerComponent('snaketail', {
        
       document.addEventListener('keyup', event => {
         if (event.code === 'Space') {
+
+          this.entities = document.querySelectorAll('a-sphere');
           
           let scene = document.querySelector('a-scene');
 
-            //Create Snake Body
+            //Create First Snake Body
+            if (data.bodyCount === 0)
+            {
               data.bodyCount++;
-              let SnakeBodyCount = "Body"+ data.bodyCount
+              SnakeBodyCount = "Body"+ data.bodyCount
+              SnakeBodyCount_Counter = "Body"+ data.bodyCount;
 
-              ballbody = document.createElement('a-sphere');
+              window.SnakeBodyCount = document.createElement('a-sphere');
+              let worldPosition = new THREE.Vector3();
 
-              var worldPosition = new THREE.Vector3();
-              el.object3D.getWorldPosition(worldPosition)
+              el.object3D.getWorldPosition(worldPosition);
 
-              ballbody.setAttribute('geometry', 'radius', 0.05)
-              ballbody.setAttribute('position',worldPosition);
-              ballbody.setAttribute('material','color','Firebrick')
-              ballbody.setAttribute('id', SnakeBodyCount )
-              scene.appendChild(ballbody)                         
+              window.SnakeBodyCount.setAttribute('geometry', 'radius', 0.05)
+              window.SnakeBodyCount.setAttribute('position',worldPosition);
+              window.SnakeBodyCount.setAttribute('material','color','Firebrick')
+              window.SnakeBodyCount.setAttribute('id', SnakeBodyCount_Counter )
+              scene.appendChild(window.SnakeBodyCount)   
+            }
+            //Append new snake section to end of snake body
+            else
+            {
+              //get previous snakebody location
+              let worldPosition = window.SnakeBodyCount.getAttribute('position');
+             
+              data.bodyCount++;
+              SnakeBodyCount = "Body"+ data.bodyCount;
+              SnakeBodyCount_Counter = "Body"+ data.bodyCount;
+
+
+              //el.object3D.getWorldPosition(worldPosition)
+              window.SnakeBodyCount = document.createElement('a-sphere');
+              
+              window.SnakeBodyCount.setAttribute('geometry', 'radius', 0.05)
+              window.SnakeBodyCount.setAttribute('position',worldPosition);
+              window.SnakeBodyCount.setAttribute('material','color','Firebrick')
+              window.SnakeBodyCount.setAttribute('id', SnakeBodyCount_Counter )
+              scene.appendChild(window.SnakeBodyCount);
+            }                       
           };
       })
     },
@@ -42,31 +76,30 @@ AFRAME.registerComponent('snaketail', {
     tick: function (_t, _dt) {
       let el = this.el;
       let data = this.data;
-  
-      let move = 0.005;
-        //Have snake body follow snake head
+      this.entities = document.querySelectorAll('a-sphere');
+      
+      let move = 0.25 //*(1/this.entities.length);
+
+       //Have snake body follow snake head
         if (data.bodyCount > 0)
         {
-          let SnakeBodyCount_JS = "#"+"Body"+data.bodyCount
+         
+          for (let i = 1; i < this.entities.length; i++) {
 
-          //get world position of snake head
-          var worldPosition = new THREE.Vector3();
-          el.object3D.getWorldPosition(worldPosition);
-
-          //const sceneEl = document.querySelector('a-scene');
-
-          //move towards world position (via lerp)
-          ballbody.object3D.position.lerp(worldPosition, 0.3)
+            let worldPosition = new THREE.Vector3();
+            this.entities[i-1].object3D.getWorldPosition(worldPosition);
+            this.entities[i].object3D.position.lerp(worldPosition, move  );
+        }   
+          
 
         }
-
 
       //change colour of snake body black with Enter key
       document.addEventListener('keyup', event => {
         if (event.code === 'Enter') {
           
-          let SnakeBodyCount = "Body"+ data.bodyCount
-          let SnakeBodyCount_JS = "#"+SnakeBodyCount
+          //let SnakeBodyCount = "Body"+ data.bodyCount
+          let SnakeBodyCount_JS = "#"+"Body"+ data.bodyCount
 
            // alert(SnakeBodyCount_JS )
           const sceneEl = document.querySelector('a-scene');

@@ -80,7 +80,7 @@ AFRAME.registerComponent("mvmt", {
     }
 
     //clamp number
-    const cylinderMin = -0.5;
+    const cylinderMin = -0.5*1.2;
     const cylinderMax = 0.5;
 
     const radiansmax = 2*Math.PI;
