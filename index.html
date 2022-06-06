@@ -15,6 +15,7 @@
   <a-scene>
 	<a-assets>
 		<img id="arrow" src="/assets/Arrow_Right.png">
+		<a-asset-item id="apple" src="/assets/Apple.gltf"></a-asset-item>
 
 		<img id="sand" src="/assets/Ring/SAND/sand.jpg">
 			<img id="albedo" src="/assets/Ring/albedo.png">
@@ -25,7 +26,6 @@
 			<img id="combined" src="/assets/Ring/combined.png">
 
 	</a-assets>
-
 	<a-camera wasd-controls-enabled="false"></a-camera>
 	<a-entity environment="preset: egypt; ground: flat"></a-entity>
 
@@ -41,12 +41,13 @@
 					repeat: 3 1"		
 		crawling-cursor="target: #snake"
 
+
 	></a-cylinder>
 
 		<a-entity id="player-wrapper">
 
 			<a-sphere	id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: 248a-8266-Unknown Gamepad" 
-			color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90"
+			color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
 			mvmt="orbit: #player-wrapper" blending="none" snaketail="orbit: #player-wrapper"></a-sphere>
 
 

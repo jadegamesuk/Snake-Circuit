@@ -1,7 +1,7 @@
 AFRAME.registerComponent("mvmt", {
   schema: {
     orbit: {type: 'selector', default: '#gameworld'},
-    movement: {type: 'number', default: 0.01},
+    movement: {type: 'number', default: 0.03},
     rotateSpeed: {type: 'number', default: 0.3},
     innerWall: {type: 'boolean', default: true}
   },
@@ -80,8 +80,8 @@ AFRAME.registerComponent("mvmt", {
     }
 
     //clamp number
-    const cylinderMin = -0.5*1.2;
-    const cylinderMax = 0.5;
+    const cylinderMin = -0.5*1.1;
+    const cylinderMax = 0.5*1.1;
 
     const radiansmax = 2*Math.PI;
     const clamp = (num, cylinderMin, cylinderMax) => Math.min(Math.max(num, cylinderMin), cylinderMax);
@@ -120,8 +120,13 @@ AFRAME.registerComponent("mvmt", {
           if (data.innerWall == true )
           {
             data.innerWall = false
+
             el.object3D.position.z-= moveZ 
+            //el.object3D.position.lerp( (moveZ - el.object3D.position.z), 0.8);
+
             el.object3D.rotation.z = -el.object3D.rotation.z
+            //el.object3D.rotation.z.lerp(-el.object3D.rotation.z, 0.9);
+
             el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
           } 
           else

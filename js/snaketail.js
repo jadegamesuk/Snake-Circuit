@@ -78,19 +78,18 @@ AFRAME.registerComponent('snaketail', {
       let data = this.data;
       this.entities = document.querySelectorAll('a-sphere');
       
-      let move = 0.25 //*(1/this.entities.length);
+      let move = 0.3 //*(1/this.entities.length);
 
        //Have snake body follow snake head
         if (data.bodyCount > 0)
-        {
-         
+        {   
+              
           for (let i = 1; i < this.entities.length; i++) {
 
             let worldPosition = new THREE.Vector3();
             this.entities[i-1].object3D.getWorldPosition(worldPosition);
-            this.entities[i].object3D.position.lerp(worldPosition, move  );
-        }   
-          
+            this.entities[i].object3D.position.lerp(worldPosition, move);
+          } 
 
         }
 
