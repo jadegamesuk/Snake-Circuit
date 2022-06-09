@@ -1,10 +1,3 @@
-
-function delay(milliseconds){
-  return new Promise(resolve => {
-      setTimeout(resolve, milliseconds);
-  });
-}
-
 AFRAME.registerComponent('snaketail', {
     schema: {
       orbit: {type: 'selector', default: '#gameworld'},

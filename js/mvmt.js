@@ -1,7 +1,7 @@
 AFRAME.registerComponent("mvmt", {
   schema: {
     orbit: {type: 'selector', default: '#gameworld'},
-    movement: {type: 'number', default: 0.03},
+    movement: {type: 'number', default: 0.01},
     rotateSpeed: {type: 'number', default: 0.3},
     innerWall: {type: 'boolean', default: true}
   },
