@@ -22,8 +22,8 @@ AFRAME.registerComponent("mvmt", {
     let data = this.data;
 
     const sceneEl = document.querySelector('a-scene');
-    const worldHeight = sceneEl.querySelector('#gameworld').getAttribute('height') ;
-
+    //const worldHeight = sceneEl.querySelector('#gameworld').getAttribute('height') ;
+   
     //Arrow Key Movement
     document.addEventListener('keydown', event => {
      
@@ -100,16 +100,16 @@ AFRAME.registerComponent("mvmt", {
         //if inside inner cylinder
           if (data.innerWall == true)
           {
-            data.innerWall = false
-            el.object3D.position.z-= moveZ 
-            el.object3D.rotation.z = -el.object3D.rotation.z
+            data.innerWall = false;
+            el.object3D.position.z-= moveZ; 
+            el.object3D.rotation.z = -el.object3D.rotation.z;
             el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
           } 
           else
           {
-            data.innerWall = true
+            data.innerWall = true;
             el.object3D.position.z += moveZ;  
-            el.object3D.rotation.z = -el.object3D.rotation.z
+            el.object3D.rotation.z = -el.object3D.rotation.z;
             el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
           }
     }

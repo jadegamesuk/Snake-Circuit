@@ -10,42 +10,24 @@ AFRAME.registerComponent('food', {
         let data = this.data;
 
         let scene = document.querySelector('a-scene');
-        this.tick = AFRAME.utils.throttleTick(this.tick, 5, this);
+        //this.tick = AFRAME.utils.throttleTick(this.tick, 5, this);
 
-        //this.entities = document.querySelectorAll('a-gltf-model');
+        // create random co-ordinate for Apple
+        // ensure no collision with Snake before creating
 
-        //create apple in random location
-        
-        data.appleCount++;
-        
-        AppleBodyCount = "Apple"+ data.appleCount
-        AppleBodyCount_Counter = "Apple"+ data.appleCount;
+        //el.object3D.position.set(1, 2, 3)
 
-        let worldPosition = new THREE.Vector3();
-        el.object3D.getWorldPosition(worldPosition);
+        // alert("X: " + applePosition.x)
+        // alert("Y: " + applePosition.y )
+        // alert("Z: " + applePosition.z )
 
-        //alert( Object.entries(worldPosition) );
-        window.AppleBodyCount = document.createElement('a-gltf-model')      
 
-        window.AppleBodyCount.setAttribute('position', worldPosition);
-        window.AppleBodyCount.object3D.scale.set(0.02, 0.02, 0.02);
-
-        window.AppleBodyCount.setAttribute('src', '/assets/Apple.glb');
-        window.AppleBodyCount.setAttribute('id', AppleBodyCount_Counter )
-        //alert(Object.entries(worldPosition))
-        scene.appendChild(window.AppleBodyCount)   
     },
 
     update: function () {
         let el = this.el;
         let data = this.data;
-        let scene = document.querySelector('a-scene');
-
-        AppleBodyCount = "Apple"+ data.appleCount
-        AppleBodyCount_Counter = "Apple"+ data.appleCount;
-
-        //window.AppleBodyCount.object3D.rotation.z += 1;
-
+        
     },
 
     remove: function () {
