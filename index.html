@@ -6,6 +6,7 @@
 <script src="www/aframe.min.js"></script>
 <script src="www/aframe-environment-component.min.js"></script>
 <script src="www/aframe-crawling-cursor.js"></script>
+<script src="www/aframe-aabb-collider-component.min.js"></script>
 <script src="js/mvmt.js"></script>
 <script src="js/snaketail.js"></script>
 <script src="js/textures.js"></script>
@@ -13,19 +14,17 @@
 
 </head>
 <body>
-  <a-scene renderer="colorManagement: true; gammaOutput: true">
+  <a-scene renderer="colorManagement: true;" reflection="directionalLight;">
 	<a-assets>
-		<img id="arrow" src="/assets/Arrow_Right.png">
-
-		<a-asset-item id="apple" src="/assets/apple.glb"></a-asset-item>
-		<img id="sand" src="/assets/Ring/SAND/sand.jpg">
+			<img id="arrow" src="/assets/Arrow_Right.png">
+			<a-asset-item id="apple" src="/assets/apple.glb"></a-asset-item>
+			<img id="sand" src="/assets/Ring/SAND/sand.jpg">
 			<img id="albedo" src="/assets/Ring/albedo.png">
 			<img id="ao" src="/assets/Ring/ao.png">
 			<img id="height1" src="/assets/Ring/height.png">
 			<img id="normal" src="/assets/Ring/normal.png">
 			<img id="roughness" src="/assets/Ring/roughness.png">
 			<img id="combined" src="/assets/Ring/combined.png">
-
 	</a-assets>
 	<a-camera wasd-controls-enabled="false"></a-camera>
 	<a-entity environment="preset: egypt; ground: flat"></a-entity>
@@ -33,7 +32,6 @@
 	<!--material="opacity: 0.8; side: double; color: #F36601" -->
 	<!--src: #albedo; displacementMap: #height1
 					ambientOcclusionMap: #ao; normalMap: #normal; roughnessMap: #roughness
-	
 					-->
     <a-cylinder 
 		id="gameworld" position="0 1.6 0" open-ended="true"
@@ -47,7 +45,7 @@
 	radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
 	material=" src: #sand" crawling-cursor="target: #apple-item"
 	 
-></a-cylinder>
+	></a-cylinder>
 
 		<a-entity id="player-wrapper">
 
@@ -55,16 +53,18 @@
 				id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: 248a-8266-Unknown Gamepad" 
 				color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
 				mvmt="orbit: #player-wrapper" blending="none" snaketail="orbit: #player-wrapper"
+				aabb-collider="objects: a-gltf-model;"
 			></a-sphere>
 
 		</a-entity>
 
-		<a-gltf-model 
-			id="apple-item" src="#apple" position="0 1.6 60.2" scale="0.4 0.4 0.4" food="orbit: #player-wrapper"
-		></a-gltf-model>
-	
-		<!--  -->
+		<a-entity id="player-wrapper2" rotation="0 30 0">
+			
+			<a-gltf-model
+				id="apple-item" src="#apple" position="0 1.6 0.2" scale="0.4 0.4 0.4" food="orbit: #player-wrapper2"
+			></a-gltf-model>	
 
+		</a-entity>
 	</a-scene>
 </body>
 </html>
