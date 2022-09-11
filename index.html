@@ -16,8 +16,8 @@
 <body>
   <a-scene renderer="colorManagement: true;" reflection="directionalLight">
 	<a-assets>
+		<a-asset-item id="apple" src="/assets/apple.glb"></a-asset-item>
 			<img id="arrow" src="/assets/Arrow_Right.png">
-			<a-asset-item id="apple" src="/assets/apple.glb"></a-asset-item>
 			<img id="sand" src="/assets/Ring/SAND/sand.jpg">
 			<img id="albedo" src="/assets/Ring/albedo.png">
 			<img id="ao" src="/assets/Ring/ao.png">
@@ -33,6 +33,14 @@
 	<!--src: #albedo; displacementMap: #height1
 					ambientOcclusionMap: #ao; normalMap: #normal; roughnessMap: #roughness
 					-->
+	<a-entity id="player-wrapper2" rotation="0 30 0" score="0">
+
+		<a-gltf-model
+			id="apple-item" src="#apple" position="0 1.6 0.2" scale="0.4 0.4 0.4" food="orbit: #player-wrapper2"
+		></a-gltf-model>	
+
+	</a-entity>
+		
     <a-cylinder 
 		id="gameworld" position="0 1.6 0" open-ended="true"
 		radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
@@ -57,13 +65,6 @@
 
 		</a-entity>
 
-		<a-entity id="player-wrapper2" rotation="0 30 0" score="0">
-			
-			<a-gltf-model
-				id="apple-item" src="#apple" position="0 1.6 0.2" scale="0.4 0.4 0.4" food="orbit: #player-wrapper2"
-			></a-gltf-model>	
-
-		</a-entity>
 	</a-scene>
 </body>
 </html>
