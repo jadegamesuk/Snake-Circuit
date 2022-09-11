@@ -24,9 +24,10 @@ AFRAME.registerComponent("mvmt", {
     const sceneEl = document.querySelector('a-scene');
     //const worldHeight = sceneEl.querySelector('#gameworld').getAttribute('height') ;
    
-    el.addEventListener("buttonchanged", function(event) {
+    el.addEventListener("buttondown", function(event) {
     
-      alert("button pressed")
+      el.object3D.rotation.z += data.rotateSpeed;
+      el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     
     })
 
