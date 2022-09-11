@@ -73,7 +73,7 @@ AFRAME.registerComponent('food', {
             document.querySelector('#player-wrapper2').appendChild(entityEl);
             entityEl.setAttribute('position', {x: xAxis, y: yAxis, z: zAxis}); 
             entityEl.setAttribute('scale', {x: 0.4, y: 0.4, z: 0.4}); 
-             console.log("X: " + xAxis + " Y: " + yAxis + " Z: " + zAxis)
+            // console.log("X: " + xAxis + " Y: " + yAxis + " Z: " + zAxis)
              document.querySelector('#gameworld2').setAttribute('crawling-cursor', {target: '#apple-item'})
 
              // Set score value

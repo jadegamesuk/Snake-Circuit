@@ -24,6 +24,13 @@ AFRAME.registerComponent("mvmt", {
     const sceneEl = document.querySelector('a-scene');
     //const worldHeight = sceneEl.querySelector('#gameworld').getAttribute('height') ;
    
+    el.addEventListener("buttonchanged", function(event) {
+    
+      alert("button pressed")
+    
+    })
+
+
     //Arrow Key Movement
     document.addEventListener('keydown', event => {
      
@@ -58,7 +65,14 @@ AFRAME.registerComponent("mvmt", {
     const maxRotation = 2*Math.PI;
     const slowdown = 0.5;
 
-    //gamepad controller code  
+el.addEventListener("buttondown", function(event) {
+
+  alert(event.detail)
+  alert("button pressed")
+
+})
+
+    //OLD gamepad controller code  
     /* 
     if (navigator.getGamepads().hasOwnProperty("0") )
     {

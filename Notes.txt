@@ -8,5 +8,3 @@ caddy stop
 caddy file-server --domain efe-lenovo-g510.local
 
 AFRAME.scenes[0].childNodes
-
-		<!-- snaketail="orbit: #player-wrapper" -->
