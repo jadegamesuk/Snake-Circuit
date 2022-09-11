@@ -14,6 +14,8 @@ AFRAME.registerComponent("mvmt", {
 
      //tracked controller
      window.addEventListener("gamepadconnected", (event) => {
+        alert("connected!")
+
        });  
   },
 
@@ -26,6 +28,7 @@ AFRAME.registerComponent("mvmt", {
    
     el.addEventListener("buttondown", function(event) {
     
+      alert(event)
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     
