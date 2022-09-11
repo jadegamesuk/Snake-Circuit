@@ -12,11 +12,6 @@ AFRAME.registerComponent("mvmt", {
 
     this.tick = AFRAME.utils.throttleTick(this.tick, 5, this);
 
-     //tracked controller
-     window.addEventListener("gamepadconnected", (event) => {
-        alert("connected!")
-
-       });  
   },
 
   update: function () {
@@ -27,8 +22,8 @@ AFRAME.registerComponent("mvmt", {
     //const worldHeight = sceneEl.querySelector('#gameworld').getAttribute('height') ;
    
     el.addEventListener("buttondown", function(event) {
-    
-      alert("Button pressed")
+
+      //should rotate the snake
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     
