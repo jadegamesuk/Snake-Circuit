@@ -24,6 +24,8 @@ AFRAME.registerComponent("mvmt", {
     el.addEventListener("buttondown", function(event) {
 
       //should rotate the snake
+      const max = 2*Math.PI;
+
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     
@@ -63,13 +65,6 @@ AFRAME.registerComponent("mvmt", {
     //Modulo for rotation angles
     const maxRotation = 2*Math.PI;
     const slowdown = 0.5;
-
-el.addEventListener("buttondown", function(event) {
-
-  alert(event.detail)
-  alert("button pressed")
-
-})
 
     //OLD gamepad controller code  
     /* 
