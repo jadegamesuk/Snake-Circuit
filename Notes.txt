@@ -6,3 +6,7 @@ wine /home/efe/Android/ovr-platform-util-pwa/ovr-platform-util.exe create-pwa -o
 caddy file-server --domain localhost
 caddy stop
 caddy file-server --domain efe-lenovo-g510.local
+
+AFRAME.scenes[0].childNodes
+
+		<!-- snaketail="orbit: #player-wrapper" -->

@@ -58,7 +58,8 @@ AFRAME.registerComponent("mvmt", {
     const maxRotation = 2*Math.PI;
     const slowdown = 0.5;
 
-    //gamepad controller code   
+    //gamepad controller code  
+    /* 
     if (navigator.getGamepads().hasOwnProperty("0") )
     {
        let test = Object.values(navigator.getGamepads()[0].axes)[1]
@@ -78,6 +79,7 @@ AFRAME.registerComponent("mvmt", {
         el.object3D.rotation.z = ((el.object3D.rotation.z % maxRotation) + maxRotation) % maxRotation; 
       }
     }
+    */
 
     //clamp number
     const cylinderMin = -0.5*1.1;

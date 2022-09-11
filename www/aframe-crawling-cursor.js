@@ -74,7 +74,7 @@
 
 	        if (data.target === null) {
 	            var cursor = document.querySelector("a-cursor");
-
+				
 	            if (cursor === null) {
 	                console.warn("Please put a-cursor in a document");
 	                return;
@@ -103,6 +103,8 @@
 	            //data.target.object3D.lookAt(lookAtTarget);
 
 	            // cursor coordinate = intersection coordinate + normal vector * offset
+				//var cursorPosition = Math.random() < 0.5 ? (new THREE.Vector3().subVectors(intersection.point, global_normal.multiplyScalar(data.offset))) : (new THREE.Vector3().addVectors(intersection.point, global_normal.multiplyScalar(data.offset))) ;
+
 	            var cursorPosition = new THREE.Vector3().subVectors(intersection.point, global_normal.multiplyScalar(data.offset));
 	            data.target.setAttribute("position", cursorPosition);
 

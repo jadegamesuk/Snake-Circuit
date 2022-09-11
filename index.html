@@ -14,7 +14,7 @@
 
 </head>
 <body>
-  <a-scene renderer="colorManagement: true;" reflection="directionalLight;">
+  <a-scene renderer="colorManagement: true;" reflection="directionalLight">
 	<a-assets>
 			<img id="arrow" src="/assets/Arrow_Right.png">
 			<a-asset-item id="apple" src="/assets/apple.glb"></a-asset-item>
@@ -37,28 +37,27 @@
 		id="gameworld" position="0 1.6 0" open-ended="true"
 		radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
 		material=" src: #sand; opacity: 0.45; side: double; repeat: 3 1"		
-		crawling-cursor="target: #snake" 
+		crawling-cursor="target: #snake"
 	></a-cylinder>
 
 	<a-cylinder 
 	id="gameworld2" position="0 1.6 0" visible="false"
 	radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
 	material=" src: #sand" crawling-cursor="target: #apple-item"
-	 
 	></a-cylinder>
 
 		<a-entity id="player-wrapper">
 
 			<a-sphere	
-				id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: 248a-8266-Unknown Gamepad" 
+				id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: OpenVR" 
 				color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
-				mvmt="orbit: #player-wrapper" blending="none" snaketail="orbit: #player-wrapper"
-				aabb-collider="objects: a-gltf-model;"
+				mvmt="orbit: #player-wrapper; innerWall: true" blending="none" bodyCount="-1"
+				aabb-collider="objects: a-gltf-model"
 			></a-sphere>
 
 		</a-entity>
 
-		<a-entity id="player-wrapper2" rotation="0 30 0">
+		<a-entity id="player-wrapper2" rotation="0 30 0" score="0">
 			
 			<a-gltf-model
 				id="apple-item" src="#apple" position="0 1.6 0.2" scale="0.4 0.4 0.4" food="orbit: #player-wrapper2"
