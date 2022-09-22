@@ -7,29 +7,19 @@ AFRAME.registerComponent('food', {
 
     init: function () {
         this.tick = AFRAME.utils.throttleTick(this.tick, 10, this);
+        let el = this.el;
+        let data = this.data;
+        let scene = document.querySelector('a-scene');
     },
 
     update: function () {
-      
-      document.addEventListener('keydown', event => {         
-          
-        if (event.code === 'KeyQ') {
-            let el = this.el;
-            let data = this.data;
-            
-            console.log("X: " + el.object3D.position.x)
-            //el.object3D.rotation.y++ use this line to animate apples 
-          }
-        })
-        
+              
       },
 
     tick: function (_t, _dt) {
-
       let el = this.el;
       let data = this.data;
       let scene = document.querySelector('a-scene');
-
         el.addEventListener("hitstart", function(event) {
 
           //if collision with apple occurs          
