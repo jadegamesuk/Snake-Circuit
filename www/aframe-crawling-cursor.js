@@ -117,6 +117,7 @@
 	                    // ignore cursor itself to avoid flicker && ignore "ignore-ray" class
 	                    if (data.target === intersections[i].object.el || intersections[i].object.el.classList.contains("ignore-ray")) { continue; }
 	                    return intersections[i];
+						//console.log("Intersections: " + intersections[i]);
 	                }
 	                return null;
 	            }
