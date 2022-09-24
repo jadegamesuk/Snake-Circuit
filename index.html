@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="manifest" href="manifest.webmanifest">
@@ -7,12 +8,12 @@
 <script src="www/aframe-crawling-cursor.js"></script>
 <script src="www/aframe-aabb-collider-component.min.js"></script>
 <script src="js/mvmt.js"></script>
-<script src="js/snaketail.js"></script>
 <script src="js/textures.js"></script>
 <script src="js/apple.js"></script>
+<script src="www/aframe-geometry-merger-component.min.js"></script>
 </head>
 <body>
-  <a-scene renderer="colorManagement: true;" reflection="directionalLight" stats>
+  <a-scene renderer="colorManagement: true;" reflection="directionalLight" stats >
 	<a-assets>
 		<a-asset-item id="apple" src="/assets/apple.glb"></a-asset-item>
 			<img id="arrow" src="/assets/Arrow_Right.png">
@@ -56,11 +57,16 @@
 			<a-sphere	
 				id="snake" position="0 1.6 0.2" tracked-controls="controller: 0; autoHide: false; idPrefix: OpenVR; hand: left" 
 				color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
-				mvmt="orbit: #player-wrapper; innerWall: true" blending="none" bodyCount="-1"
+				mvmt="orbit: #player-wrapper; innerWall: true" blending="none" bodyCount="0"
 				aabb-collider="objects: a-gltf-model"
 			></a-sphere>
 
 		</a-entity>
+
+		<a-entity 
+			id="snakebodies" geometry-merger="preserveOriginal: false" material="color: #AAA" 
+			class="ignore-ray"
+		></a-entity>
 		
   </a-scene>
 </body>

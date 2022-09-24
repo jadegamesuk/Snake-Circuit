@@ -7,49 +7,37 @@ AFRAME.registerComponent("mvmt", {
   },
 
   init: function() {
+    this.tick = AFRAME.utils.throttleTick(this.tick, 10, this);
+
     let el = this.el;
     let data = this.data;
+    let sceneEl = document.querySelector('a-scene');
 
-    this.tick = AFRAME.utils.throttleTick(this.tick, 5, this);
-
-  },
-
-  update: function () {
-    let el = this.el;
-    let data = this.data;
-
-    const sceneEl = document.querySelector('a-scene');
-    //const worldHeight = sceneEl.querySelector('#gameworld').getAttribute('height') ;
-   
+    //VR controller can rotate the snake
     el.addEventListener("buttondown", function(event) {
 
-      //should rotate the snake
       const max = 2*Math.PI;
-
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
-    
     })
 
-
-    //Arrow Key Movement
-    document.addEventListener('keydown', event => {
+     //Keyboard Movement
+     document.addEventListener('keydown', event => {
      
-    //Modulo for rotation angles
-    const max = 2*Math.PI;
-
-      if (event.code === 'ArrowLeft') {
-        //rotate snake counter-clockwise
-        el.object3D.rotation.z += data.rotateSpeed;
-        el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
-      }
-      if (event.code === 'ArrowRight') {
-        //rotate snake clockwise
-        el.object3D.rotation.z -= data.rotateSpeed;
-        el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max;
-      }
-
-    })
+      //Modulo for rotation angles
+      const max = 2*Math.PI;
+  
+        if (event.code === 'ArrowLeft') {
+          //rotate snake counter-clockwise
+          el.object3D.rotation.z += data.rotateSpeed;
+          el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
+        }
+        if (event.code === 'ArrowRight') {
+          //rotate snake clockwise
+          el.object3D.rotation.z -= data.rotateSpeed;
+          el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max;
+        }
+      })
   },
 
   tick: function  (_t, _dt) {
@@ -58,13 +46,9 @@ AFRAME.registerComponent("mvmt", {
     let data = this.data;
     
     let angle = (el.object3D.rotation.z)
-    //let angle = 0
-    //console.log(angle)
-    const moveZ = 0.1;
 
     //Modulo for rotation angles
     const maxRotation = 2*Math.PI;
-    const slowdown = 0.5;
 
     //OLD gamepad controller code  
     /* 
@@ -92,8 +76,10 @@ AFRAME.registerComponent("mvmt", {
     //clamp number
     const cylinderMin = -0.5*1.1;
     const cylinderMax = 0.5*1.1;
-
     const radiansmax = 2*Math.PI;
+    const moveZ = 0.1;
+
+    //const radiansmax = 2*Math.PI;
     const clamp = (num, cylinderMin, cylinderMax) => Math.min(Math.max(num, cylinderMin), cylinderMax);
 
     //horizontal movement
@@ -104,48 +90,44 @@ AFRAME.registerComponent("mvmt", {
     data.orbit.object3D.position.y += data.movement * Math.sin(angle); 
     data.orbit.object3D.position.y = clamp(data.orbit.object3D.position.y, cylinderMin, cylinderMax);
 
-    //wrapping around top edge code
+      //wrapping around top edge code
       if (data.orbit.object3D.position.y >= cylinderMax ) {
 
-        //if inside inner cylinder
-          if (data.innerWall == true)
-          {
-            data.innerWall = false;
-            el.object3D.position.z-= moveZ; 
-            el.object3D.rotation.z = -el.object3D.rotation.z;
-            el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
-          } 
-          else
-          {
-            data.innerWall = true;
-            el.object3D.position.z += moveZ;  
-            el.object3D.rotation.z = -el.object3D.rotation.z;
-            el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
-          }
+      //if inside inner cylinder
+        if (data.innerWall == true)
+        {
+          data.innerWall = false;
+          el.object3D.position.z-= moveZ; 
+          el.object3D.rotation.z = -el.object3D.rotation.z;
+          el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
+        } 
+        else
+        {
+          data.innerWall = true;
+          el.object3D.position.z += moveZ;  
+          el.object3D.rotation.z = -el.object3D.rotation.z;
+          el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
+        }
     }
 
-      //wrapping around bottom edge code
-        if (data.orbit.object3D.position.y <= cylinderMin ) {
+    //wrapping around bottom edge code
+      if (data.orbit.object3D.position.y <= cylinderMin ) {
 
-          if (data.innerWall == true )
-          {
-            data.innerWall = false
-
-            el.object3D.position.z-= moveZ 
-            //el.object3D.position.lerp( (moveZ - el.object3D.position.z), 0.8);
-
-            el.object3D.rotation.z = -el.object3D.rotation.z
-            //el.object3D.rotation.z.lerp(-el.object3D.rotation.z, 0.9);
-
-            el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
-          } 
-          else
-          {
-            data.innerWall = true
-            el.object3D.position.z += moveZ;  
-            el.object3D.rotation.z = -el.object3D.rotation.z
-            el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
-          }
-        }}
+        if (data.innerWall == true )
+        {
+          data.innerWall = false
+          el.object3D.position.z-= moveZ 
+          el.object3D.rotation.z = -el.object3D.rotation.z
+          el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
+        } 
+        else
+        {
+          data.innerWall = true
+          el.object3D.position.z += moveZ;  
+          el.object3D.rotation.z = -el.object3D.rotation.z
+          el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
+        }
+      }
+    }
 
 });
