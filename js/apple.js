@@ -21,8 +21,8 @@ AFRAME.registerComponent('food', {
               //delete gltf apple
               el.parentNode.removeChild(el);
               event.target.id = '#apple-item';
-  
-               //create new apple
+
+              //create new apple
               let entityEl = document.createElement('a-gltf-model');
               entityEl.setAttribute('src', '#apple');
               entityEl.setAttribute('id', 'apple-item' );
@@ -43,11 +43,34 @@ AFRAME.registerComponent('food', {
               let yAxis = getRandomArbitrary(1.1, 1.9);
               let zAxis = el.object3D.getWorldPosition(worldPosition).z   
   
-              document.querySelector('#player-wrapper2').appendChild(entityEl);
+              //document.querySelector('#player-wrapper2').appendChild(entityEl);
               entityEl.object3D.position.set(xAxis, yAxis, zAxis);
   
               console.log("X: " + xAxis + " Y: " + yAxis + " Z: " + zAxis)
                
+
+              //pool work
+              //Check to decide if an apple or pineapple will be generated
+              //create apple or pineapple from pool
+              //Change the 0.1 value to 0.5
+              let oneOrZero = (Math.random()>0.001)? 1 : 0
+
+              if (oneOrZero)
+              {
+                document.querySelector('#entity_applepool').components.pool__applepool.requestEntity();
+                let fruit = document.querySelector('#entity_applepool') 
+                fruit.childNodes[0].id = "Not really important"
+                fruit.childNodes[0].object3D.position.set(xAxis, yAxis, zAxis)
+                //fruit.childNodes[0].object3D.position.z = -5.4
+                //console.log("z Coordinate: "  + document.querySelector('#entity_applepool').childNodes[0].object3D.position.z)
+              }
+              else
+              { 
+                document.querySelector('#entity_pineapplepool').components.pool__pineapplepool.requestEntity();
+              }
+
+              //Pool work ends
+
                // Set score value
               let snakeScore = document.querySelector('#player-wrapper2').getAttribute('score')
               snakeScore = Number(snakeScore) + 5;
