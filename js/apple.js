@@ -1,77 +1,23 @@
 AFRAME.registerComponent('food', {
     schema: {
         orbit: {type: 'selector', default: '#gameworld2'},
-        appleCount: {type: 'number', default: 0},
-        food: {type: 'selector', default: '#apple'}
+        appleCount: {type: 'number', default: 0}
     },
 
     init: function () {
-        this.tick = AFRAME.utils.throttleTick(this.tick, 10, this);
+        this.tick = AFRAME.utils.throttleTick(this.tick, 20, this);
 
         let el = this.el;
-        let data = this.data;
-        let scene = document.querySelector('a-scene');
-        this.entities = document.querySelectorAll('a-sphere');
+        //let data = this.data;
+        //var sceneEl = document.querySelector('a-scene');
 
-        el.addEventListener("hitstart", function(event) {
-  
-            //if collision with apple occurs          
-          if (event.target.id == "apple-item")
-          {
-              //delete gltf apple
-              el.parentNode.removeChild(el);
-              event.target.id = '#apple-item';
+        el.addEventListener("hitstart", function collisionHandler(event) {
 
-              //create new apple
-              let entityEl = document.createElement('a-gltf-model');
-              entityEl.setAttribute('src', '#apple');
-              entityEl.setAttribute('id', 'apple-item' );
-              entityEl.setAttribute('scale', {x: 0.4, y: 0.4, z: 0.4});
-              entityEl.setAttribute('food', {orbit: '#player-wrapper2'} );      
-  
-              function getRandomArbitrary(min, max) {
-                return Math.random() * (max - min) + min;
-              }
-  
-              let worldPosition = new THREE.Vector3();
-                /*
-                Replace the below with the old apple variable but
-                use the player-wrapper2 to move the apple rather than anything else
-                This should fix some weird bugs
-                */
-              let xAxis = el.object3D.getWorldPosition(worldPosition).x
-              let yAxis = getRandomArbitrary(1.1, 1.9);
-              let zAxis = el.object3D.getWorldPosition(worldPosition).z   
-  
-              //document.querySelector('#player-wrapper2').appendChild(entityEl);
-              entityEl.object3D.position.set(xAxis, yAxis, zAxis);
-  
-              console.log("X: " + xAxis + " Y: " + yAxis + " Z: " + zAxis)
-               
+              //if fruit collides with snakehead        
+              //console.log("COLLISION WITH: " , el.components["aabb-collider"]["intersectedEls"][0])
+              let crashCoOrdinates = el.components["aabb-collider"]["intersectedEls"][0].object3D.position // event.target.object3D.position;
 
-              //pool work
-              //Check to decide if an apple or pineapple will be generated
-              //create apple or pineapple from pool
-              //Change the 0.1 value to 0.5
-              let oneOrZero = (Math.random()>0.001)? 1 : 0
-
-              if (oneOrZero)
-              {
-                document.querySelector('#entity_applepool').components.pool__applepool.requestEntity();
-                let fruit = document.querySelector('#entity_applepool') 
-                fruit.childNodes[0].id = "Not really important"
-                fruit.childNodes[0].object3D.position.set(xAxis, yAxis, zAxis)
-                //fruit.childNodes[0].object3D.position.z = -5.4
-                //console.log("z Coordinate: "  + document.querySelector('#entity_applepool').childNodes[0].object3D.position.z)
-              }
-              else
-              { 
-                document.querySelector('#entity_pineapplepool').components.pool__pineapplepool.requestEntity();
-              }
-
-              //Pool work ends
-
-               // Set score value
+              // Set score value
               let snakeScore = document.querySelector('#player-wrapper2').getAttribute('score')
               snakeScore = Number(snakeScore) + 5;
               document.querySelector('#player-wrapper2').setAttribute('score', snakeScore)
@@ -80,58 +26,35 @@ AFRAME.registerComponent('food', {
               let snakeBodyCount = document.querySelector('#snake').getAttribute('bodyCount')
               snakeBodyCount = Number(snakeBodyCount) + 1;
               document.querySelector('#snake').setAttribute('bodyCount', snakeBodyCount)
-              console.log("Snake Body Count: " + snakeBodyCount + " Snake Score: " + snakeScore)
+
+              console.log("Snake Body Count: " + snakeBodyCount + " Snake Score: " + snakeScore);
 
               //Create First Snake Body
-                if (snakeBodyCount === 1)
-                {
-                  snakeBodyCount++;
                   snakeBodyCount = "Body"+ snakeBodyCount
-                  snakeBodyCount_Counter = "Body"+ snakeBodyCount;
     
                   window.snakeBodyCount = document.createElement('a-sphere');
-                  let worldPosition = new THREE.Vector3();
-    
-                  el.object3D.getWorldPosition(worldPosition);
-                  
                   window.snakeBodyCount.setAttribute('geometry', 'radius', 0.05)
-                  window.snakeBodyCount.setAttribute('position',worldPosition);
+                  window.snakeBodyCount.setAttribute('position',crashCoOrdinates);
                   window.snakeBodyCount.setAttribute('material','color','Firebrick')
-                  window.snakeBodyCount.setAttribute('id', snakeBodyCount_Counter )
-                 // window.snakeBodyCount.setAttribute('class','ignore-ray')
+                  window.snakeBodyCount.setAttribute('id', snakeBodyCount )
+                  window.snakeBodyCount.setAttribute('class','ignore-ray')
                  document.querySelector('#snakebodies').appendChild(window.snakeBodyCount) 
-                  //scene.appendChild(window.snakeBodyCount)   
-                }
-                //Append new snake section to end of snake body
-                else
-                {
-                  //get previous snakebody location
-                  let worldPosition = window.snakeBodyCount.getAttribute('position');
-                 
-                  snakeBodyCount++;
-                  snakeBodyCount = "Body"+ snakeBodyCount;
-                  snakeBodyCount_Counter = "Body"+ snakeBodyCount;
-     
-                  //el.object3D.getWorldPosition(worldPosition)
-                  window.snakeBodyCount = document.createElement('a-sphere');
-                  
-                  window.snakeBodyCount.setAttribute('geometry', 'radius', 0.05)
-                  window.snakeBodyCount.setAttribute('position',worldPosition);
-                  window.snakeBodyCount.setAttribute('material','color','Firebrick')
-                  window.snakeBodyCount.setAttribute('id', snakeBodyCount_Counter )
-                  //window.snakeBodyCount.setAttribute('class','ignore-ray')
-                  //scene.appendChild(window.snakeBodyCount);
-                  document.querySelector('#snakebodies').appendChild(window.snakeBodyCount) 
-                } 
-            }}
-)},
+
+              //removing event listener
+              el.removeEventListener('hitstart', collisionHandler)
+              //adding event listener
+              //el.addEventListener('hitstart', collisionHandler)
+        })
+           
+},
 
     tick: function (_t, _dt) { 
               //Have snake body follow snake head
-              if (this.entities.length >= 1)
+              this.entities = document.querySelectorAll('a-sphere');
+              if (this.entities.length >= 2)
               {   
-                let move = 0.2 
-      
+                let move = 0.2; 
+
                   for (let i = 1; i < this.entities.length; i++) {
       
                     let worldPosition = new THREE.Vector3();

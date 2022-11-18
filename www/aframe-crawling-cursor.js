@@ -107,7 +107,9 @@
 
 	            var cursorPosition = new THREE.Vector3().subVectors(intersection.point, global_normal.multiplyScalar(data.offset));
 	            data.target.setAttribute("position", cursorPosition);
-
+				
+				//console.log("DATA TARGET" , data.target)
+				//data.target.Object3D.position = cursorPosition;
 				//console.log("intersect pos: " + cursorPosition.z);
 				//console.log("intersect.length " + intersection.point.z);
 

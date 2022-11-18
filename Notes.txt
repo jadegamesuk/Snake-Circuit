@@ -13,3 +13,23 @@ systemctl start caddy
 sudo setcap CAP_NET_BIND_SERVICE=+eip $(which caddy)
 
 caddy file-server --root ~/Documents/GitHub/Oculus/Snake-Circuit
+
+
+Juice Lessons
+*************
+Tween everything
+Scale fruit once created/destroyed
+fruit flashes white when eaten
+sound - can be semi-obnoxious
+particles effects
+    dust effect for tail
+    snake tail
+add BIG eyes to everything
+    snake eyes follow fruit
+    eyes on fruit
+    Mouth on snake
+Glow shader around fruit
+rotate fruit
+chromatic aberration
+shockware/wave motion effect
+haptic feedback
