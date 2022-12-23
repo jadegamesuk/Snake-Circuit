@@ -66,7 +66,7 @@
 	        }
 	    },
 
-	    multiple: false,
+	    multiple: true,
 
 	    init: function() {
 	        var el = this.el;

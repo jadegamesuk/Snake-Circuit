@@ -10,7 +10,7 @@
 <script src="www/aframe-geometry-merger-component.min.js"></script>
 <script src="js/mvmt.js"></script>
 <script src="js/textures.js"></script>
-<script src="js/apple.js"></script>
+<script src="js/score_and_body.js"></script>
 <script src="js/init-fruit.js"></script>
 
 </head>
@@ -28,55 +28,57 @@
 		<img id="normal" src="/assets/Ring/normal.png">
 		<img id="roughness" src="/assets/Ring/roughness.png">
 		<img id="combined" src="/assets/Ring/combined.png">
-
+		
 		<a-mixin id="fruit-apple" scale="0.8 0.8 0.8" gltf-model="#apple"  ></a-mixin>
 		<a-mixin id="fruit-pineapple" scale="0.6 0.6 0.6"  gltf-model="#pineapple"></a-mixin>		
 		<a-mixin id="fruit-cherries" scale="0.8 0.8 0.8" gltf-model="#cherries"></a-mixin>	
+		
 	</a-assets>
 	<a-camera wasd-controls-enabled="false"></a-camera>
-	<a-entity environment="preset: egypt; ground: flat"></a-entity>
+	<a-entity environment="preset: egypt; ground: flat; dressingAmount: 2"></a-entity>
 
 	<!--material="opacity: 0.8; side: double; color: #F36601" -->
 	<!--src: #albedo; displacementMap: #height1
 					ambientOcclusionMap: #ao; normalMap: #normal; roughnessMap: #roughness
-					
-					-->
-	<a-entity id="player-wrapper2" rotation="0 0 0" score="0" >
-
-	<!--
-		food="orbit: #player-wrapper2" class="fruit"  
-		position="0 1.6 0.2"
-		 tracked-controls="controller: 0; autoHide: false; idPrefix: OpenVR; hand: left" 
+							crawling-cursor="target: #fruit-apple"
 	-->
+	<a-entity id="player-wrapper2" score="0" >
+	
 		<a-entity 
-			id="fruit_applepool" data-aabb-collider-dynamic class="fruit"
-			pool__applepool="mixin: fruit-apple; size: 1"
+			id="fruit_applepool" pool__applepool="mixin: fruit-apple; size: 3"
+			class="fruit" data-aabb-collider-dynamic="true"
+	
+			animation__normalSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3000; pauseEvents: hitstart; resumeEvents: hitend"
+			animation__eatenSpin="property: rotation; from: 0 0 0; to: 0 360 0; easing: linear; loop: 1; dur: 200; startEvents: hitstart; pauseEvents: hitend"
+
+			animation__normalScale="property: scale; to: 1 1 1; pauseEvents: hitstart; resumeEvents: hitend"
+			animation__eatenShrink="property: scale; to: 0.3 0.3 0.3; dur: 150; startEvents: hitstart; pauseEvents: hitend"
 		></a-entity>
-	<!--
 		<a-entity 
-			id="fruit_pineapplepool" pool__pineapplepool="mixin: fruit-pineapple; size: 1"
-			class="fruit" 
+			id="fruit_pineapplepool" pool__pineapplepool="mixin: fruit-pineapple; size: 3"
+			class="fruit" data-aabb-collider-dynamic="true"
+			animation="property: rotation; from: 0 0 20; to: 0 -360 20; easing: linear; loop: true; dur: 2500"
+			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 1; dur: 200; startEvents: hitstart"
+			animation__eatenShrink="property: scale; from: 1 1 1; to: 0.3 0.3 0.3; dur: 150; startEvents: hitstart"
+		></a-entity>
+		<a-entity 
+			id="fruit_cherriespool" pool__cherriespool="mixin: fruit-cherries; size: 3"
+			class="fruit" data-aabb-collider-dynamic="true"
+			animation="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3200"
+			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 1; dur: 100; startEvents: hitstart"
+			animation__eatenShrink="property: scale; from: 1 1 1; to: 0.3 0.3 0.3; dur: 200; startEvents: hitstart"
 		></a-entity>
 
-		<a-entity 
-			id="fruit_cherriespool" pool__cherriespool="mixin: fruit-cherries; size: 1"
-			class="fruit" 
-		></a-entity>
-	-->
 	</a-entity>
 		
     <a-cylinder 
 		id="gameworld" position="0 1.6 0" open-ended="true"
 		radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
 		material="src: #sand; opacity: 0.45; side: double; repeat: 3 1"		
-		crawling-cursor="target: #snake" 
-	></a-cylinder>
-
-	<a-cylinder 
-	id="gameworld2" position="0 1.6 0" visible="false"
-	radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
-	material="src: #sand" 
-	crawling-cursor="target: #fruit_applepool"
+		crawling-cursor__snake="target: #snake" 
+		crawling-cursor__apple="target: #fruit_applepool"
+		crawling-cursor__pineapple="target: #fruit_pineapplepool"
+		crawling-cursor__cherries="target: #fruit_cherriespool"
 	></a-cylinder>
 
 		<a-entity id="player-wrapper" >
@@ -84,10 +86,9 @@
 				id="snake"
 				color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
 				mvmt="orbit: #player-wrapper" blending="none" bodyCount="0"
-				aabb-collider="objects: .fruit; debug: true" 
-				init-fruit data-aabb-collider-dynamic
-				food="orbit: #player-wrapper2" 
-				
+				aabb-collider="objects: .fruit; debug: true" data-aabb-collider-dynamic="true"
+				score_and_body="orbit: #player-wrapper2" 
+				init-fruit
 			></a-sphere>
 		</a-entity>
 

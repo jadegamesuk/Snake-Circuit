@@ -1,6 +1,6 @@
-AFRAME.registerComponent('food', {
+AFRAME.registerComponent('score_and_body', {
     schema: {
-        orbit: {type: 'selector', default: '#gameworld2'},
+        orbit: {type: 'selector', default: '#player-wrapper2'},
         appleCount: {type: 'number', default: 0}
     },
 
@@ -41,7 +41,7 @@ AFRAME.registerComponent('food', {
                  document.querySelector('#snakebodies').appendChild(window.snakeBodyCount) 
 
               //removing event listener
-              el.removeEventListener('hitstart', collisionHandler)
+              //el.removeEventListener('hitstart', collisionHandler)
               //adding event listener
               //el.addEventListener('hitstart', collisionHandler)
         })
