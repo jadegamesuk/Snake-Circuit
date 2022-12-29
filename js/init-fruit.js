@@ -19,16 +19,15 @@ AFRAME.registerComponent('init-fruit', {
           } 
 
         //create first initial fruit
-        //let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
-        //console.log("FRUIT: " , randomFruitFromList)
-        //let randomFruitPool = "pool__" + randomFruitFromList.substring(6);
+        let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
+        console.log("FRUIT: " , randomFruitFromList)
+        let randomFruitPool = "pool__" + randomFruitFromList.substring(6);
 
 
-        firstFruit = document.querySelector('#fruit_pineapplepool').components["pool__pineapplepool"].requestEntity();
-        //let firstFruit = document.querySelector('#' + randomFruitFromList ).components[randomFruitPool].requestEntity();
+        //firstFruit = document.querySelector('#fruit_pineapplepool').components["pool__pineapplepool"].requestEntity();
+        let firstFruit = document.querySelector('#' + randomFruitFromList ).components[randomFruitPool].requestEntity();
         
         el.addEventListener("hitstart", function fruitCollisionHandler(event) {
-            //var sceneEl = document.querySelector('a-scene');
 
             //removing event listener
             el.removeEventListener('hitstart', fruitCollisionHandler);
