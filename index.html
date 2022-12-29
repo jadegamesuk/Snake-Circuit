@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<title>PlaySnake Circuit</title>
 <link rel="manifest" href="manifest.webmanifest">
 <script src="www/app.js" async></script>
 <script src="www/aframe.min.js"></script>
@@ -30,7 +31,7 @@
 		<img id="combined" src="/assets/Ring/combined.png">
 		
 		<a-mixin id="fruit-apple" scale="0.8 0.8 0.8" gltf-model="#apple"  ></a-mixin>
-		<a-mixin id="fruit-pineapple" scale="0.6 0.6 0.6"  gltf-model="#pineapple"></a-mixin>		
+		<a-mixin id="fruit-pineapple" scale="0.7 0.7 0.7"  gltf-model="#pineapple"></a-mixin>		
 		<a-mixin id="fruit-cherries" scale="0.8 0.8 0.8" gltf-model="#cherries"></a-mixin>	
 		
 	</a-assets>
@@ -49,25 +50,27 @@
 			class="fruit" data-aabb-collider-dynamic="true"
 	
 			animation__normalSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3000; pauseEvents: hitstart; resumeEvents: hitend"
-			animation__eatenSpin="property: rotation; from: 0 0 0; to: 0 360 0; easing: linear; loop: 1; dur: 200; startEvents: hitstart; pauseEvents: hitend"
+			animation__eatenCycleSize="property: scale; from: 0.8 0.8 0.8; to: 1.1 1.1 1.1; loop: 1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
+			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 2; dur: 150; startEvents: hitstart; pauseEvents: hitend"
+		></a-entity>
+ 
+		<a-entity 
+		id="fruit_pineapplepool" pool__pineapplepool="mixin: fruit-pineapple; size: 3"
+		class="fruit" data-aabb-collider-dynamic="true"
 
-			animation__normalScale="property: scale; to: 1 1 1; pauseEvents: hitstart; resumeEvents: hitend"
-			animation__eatenShrink="property: scale; to: 0.3 0.3 0.3; dur: 150; startEvents: hitstart; pauseEvents: hitend"
-		></a-entity>
-		<a-entity 
-			id="fruit_pineapplepool" pool__pineapplepool="mixin: fruit-pineapple; size: 3"
-			class="fruit" data-aabb-collider-dynamic="true"
-			animation="property: rotation; from: 0 0 20; to: 0 -360 20; easing: linear; loop: true; dur: 2500"
-			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 1; dur: 200; startEvents: hitstart"
-			animation__eatenShrink="property: scale; from: 1 1 1; to: 0.3 0.3 0.3; dur: 150; startEvents: hitstart"
-		></a-entity>
-		<a-entity 
-			id="fruit_cherriespool" pool__cherriespool="mixin: fruit-cherries; size: 3"
-			class="fruit" data-aabb-collider-dynamic="true"
-			animation="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3200"
-			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 1; dur: 100; startEvents: hitstart"
-			animation__eatenShrink="property: scale; from: 1 1 1; to: 0.3 0.3 0.3; dur: 200; startEvents: hitstart"
-		></a-entity>
+		animation__normalSpin="property: rotation; from: 0 0 20; to: 0 -360 20; easing: linear; loop: true; dur: 2500; pauseEvents: hitstart; resumeEvents: hitend"
+		animation__eatenCycleSize="property: scale; from: 0.7 0.7 0.7; to: 1.1 1.1 1.1; loop: 1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
+		animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 1; dur: 150; startEvents: hitstart"
+	></a-entity>
+<!--
+	<a-entity 
+		id="fruit_cherriespool" pool__cherriespool="mixin: fruit-cherries; size: 3"
+		class="fruit" data-aabb-collider-dynamic="true"
+
+		animation__normalSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3000; pauseEvents: hitstart; resumeEvents: hitend"
+		animation__eatenCycleSize="property: scale; from: 0.8 0.8 0.8; to: 1.3 1.3 1.3; loop:1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
+		animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 1; dur: 150; startEvents: hitstart"
+	></a-entity> -->
 
 	</a-entity>
 		
