@@ -1,4 +1,4 @@
-AFRAME.registerComponent('init-fruit', {
+AFRAME.registerComponent('fruit-create', {
 
     init: function () {
 
@@ -10,9 +10,7 @@ AFRAME.registerComponent('init-fruit', {
         let fruitList = [];
 
          fruitclassList = document.getElementsByClassName("fruit");
-        document.querySelectorAll(`[id^="fruit_"]`).forEach(element => fruitList.push(element.id));
-
-        
+        document.querySelectorAll(`[id^="fruit_"]`).forEach(element => fruitList.push(element.id));  
 
         function getRandomArbitrary(min, max) {
             return Math.random() * (max - min) + min;
@@ -20,44 +18,49 @@ AFRAME.registerComponent('init-fruit', {
 
         //create first initial fruit
         let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
-        console.log("FRUIT: " , randomFruitFromList)
+        //console.log("FRUIT: " , randomFruitFromList)
         let randomFruitPool = "pool__" + randomFruitFromList.substring(6);
 
 
         //firstFruit = document.querySelector('#fruit_pineapplepool').components["pool__pineapplepool"].requestEntity();
-        let firstFruit = document.querySelector('#' + randomFruitFromList ).components[randomFruitPool].requestEntity();
-        
+        let firstFruit = document.querySelector('#' + randomFruitFromList).components[randomFruitPool].requestEntity();
+        //document.querySelector('#' + randomFruitFromList).object3D.rotation.y += 2
+
+
         el.addEventListener("hitstart", function fruitCollisionHandler(event) {
 
             //removing event listener
             el.removeEventListener('hitstart', fruitCollisionHandler);
-
-            //disable AABB debug
-            //turn off/on crawling-cursor
-            //document.querySelector('#snake').getAttribute('aabb-collider')['debug'] = false
-            //document.querySelector('#snake').getAttribute('aabb-collider')['debug'] = false;           
-            //document.querySelector('#snake').getAttribute('aabb-collider')['enabled'] = false;            
             
-            //return fruit to pool
-            
-            let fruitPool = event.target.components["aabb-collider"]["intersectedEls"].map(x => x.id)[0].substring(6);
-            let fullpoolName = "pool__" + fruitPool;
+            //let fruitPool = event.target.components["aabb-collider"]["intersectedEls"].map(x => x.id)[0].substring(6);
+            //let fullpoolName = "pool__" + fruitPool;
 
-            firstFruit = document.querySelector('#fruit_' + fruitPool ).components[fullpoolName].requestEntity();
-            //console.log("firstFruit" , firstFruit);
+/*          let TTT = document.querySelector('#fruit_' + fruitPool ).object3D.rotation;
+            TTT.y += 10;
+            console.log("-+-+-+-+-+-+-+-+-+-+-+-+-")
+            console.log("TEST is: " , TTT) 
+*/
 
-            console.log("******************************************")
-            console.log("RETURN " + fruitPool + " TO POOL");
+            //firstFruit = document.querySelector('#fruit_' + fruitPool ).components[fullpoolName].requestEntity();
+
+            console.log("GET FROM POOL");
             console.log("******************************************")
             //document.querySelector('#fruit_'+ fruitPool).components[fullpoolName].returnEntity(firstFruit);
            //firstFruit = document.querySelector('#fruit_' + fruitPool ).components[fullpoolName].requestEntity();
 
-
             //Get random fruit from pool
             let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
-            //let randomFruitFromList = fruitList[0];
             let correctFruitPool = 'pool__' + randomFruitFromList.substring(6);
-            
+
+            firstFruit = document.querySelector('#' + randomFruitFromList ).components[correctFruitPool].requestEntity();
+            //document.querySelector('#' + randomFruitFromList ).className = "fruit"
+
+            console.log("Set Fruit Position:");
+            console.log("******************************************")
+            console.log("POSITION: " , document.querySelector('#' + randomFruitFromList ).object3D.position );
+                // copy MVMT.js code to get fruit moving 
+
+/*            
             //console.log("Selected Fruit: " + randomFruitFromList + " & POOL NAME IS " + correctFruitPool )
 
              //get fruit from pool
@@ -78,7 +81,7 @@ AFRAME.registerComponent('init-fruit', {
              console.log(" FRUIT X: " + fruitID.object3D.position.x + 
                          " FRUIT Y: " + fruitID.object3D.position.y + 
                          " FRUIT Z: " + fruitID.object3D.position.z)
-
+*/
             //adding event listener
             el.addEventListener('hitstart', fruitCollisionHandler);            
     })
