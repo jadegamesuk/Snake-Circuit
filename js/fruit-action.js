@@ -7,7 +7,7 @@ AFRAME.registerComponent('fruit-action', {
             //removing event listener
             el.removeEventListener('hitstart', snakeCollisionHandler);
 
-
+            // Returning Fruit to Pool
             let FruitpoolName = event.target.id;
             let poolName = "pool__" + FruitpoolName.substring(6);
             console.log("============================")

@@ -52,7 +52,7 @@
 	
 			animation__normalSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3000; pauseEvents: hitstart; resumeEvents: hitend"
 			animation__eatenCycleSize="property: scale; from: 0.8 0.8 0.8; to: 1.1 1.1 1.1; loop: 1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
-			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 2; dur: 150; startEvents: hitstart; pauseEvents: hitend"
+			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 150; startEvents: hitstart; pauseEvents: hitend"
 		></a-entity>
  
 		<a-entity 
@@ -61,7 +61,7 @@
 
 		animation__normalSpin="property: rotation; from: 0 0 20; to: 0 -360 20; easing: linear; loop: true; dur: 2500; pauseEvents: hitstart; resumeEvents: hitend"
 		animation__eatenCycleSize="property: scale; from: 0.7 0.7 0.7; to: 1.1 1.1 1.1; loop: 1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
-		animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: 1; dur: 150; startEvents: hitstart"
+		animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 150; startEvents: hitstart; pauseEvents: hitend"
 	></a-entity>
 <!--
 	<a-entity 
@@ -92,7 +92,7 @@
 				mvmt="orbit: #player-wrapper" blending="none" bodyCount="0"
 				aabb-collider="objects: .fruit; debug: true" data-aabb-collider-dynamic="true"
 				score_and_body="orbit: #player-wrapper2" 
-				fruit-create
+				fruit-create="orbit: #player-wrapper2"
 			></a-sphere>
 		</a-entity>
 
