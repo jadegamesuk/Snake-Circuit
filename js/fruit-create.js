@@ -63,12 +63,22 @@ AFRAME.registerComponent('fruit-create', {
             console.log("POSITION: " , document.querySelector('#' + randomFruitFromList ).object3D.position );
             
             // copy MVMT.js code to get fruit moving along gameworld
-            data.fruitlerp = true;
+            const maxRotation = 2*Math.PI;
+            const clamp = (num, cylinderMin, cylinderMax) => Math.min(Math.max(num, cylinderMin), cylinderMax);
+            const cylinderMin = -0.5*1.1;
+            const cylinderMax = 0.5*1.1;
 
+            //X-Axis Info (should be around 50-100) ;
+            let xAxis = data.orbit.object3D.rotation.y - (data.movement * Math.random() );
+            //let xAxis = data.orbit.object3D.rotation.y - getRandomArbitrary(0, data.movement);
+            xAxis = ((xAxis % maxRotation) + maxRotation) % maxRotation;
+
+            console.log("xAxis: " + xAxis)
             //Final Animation
             //let fruitRotation = [xAxis, data.orbit.object3D.rotation.y, data.orbit.object3D.rotation.z]
-            //data.orbit.setAttribute('animation', 'property: rotation; to: xAxis' );
-            //data.orbit.object3D.rotation.y = xAxis;
+            //data.orbit.setAttribute('animation__fruit', 'property: rotation; to: 0, `${xAxis}`, 0; easing: easeOutElastic' );
+            data.orbit.setAttribute('animation__fruit', `property: rotation; to: 0 ${xAxis*10} 0; easing: easeOutElastic; elasticity: 1000 ` );
+
 /*            
             //console.log("Selected Fruit: " + randomFruitFromList + " & POOL NAME IS " + correctFruitPool )
 
@@ -115,11 +125,6 @@ AFRAME.registerComponent('fruit-create', {
             
             let el = this.el;
             let data = this.data;
-
-            const maxRotation = 2*Math.PI;
-            const clamp = (num, cylinderMin, cylinderMax) => Math.min(Math.max(num, cylinderMin), cylinderMax);
-            const cylinderMin = -0.5*1.1;
-            const cylinderMax = 0.5*1.1;
 
              function lerp(position, targetPosition, amount) {
                 // update position by 20% of the distance between position and target position
