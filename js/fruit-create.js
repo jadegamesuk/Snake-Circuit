@@ -17,17 +17,21 @@ AFRAME.registerComponent('fruit-create', {
 
         document.querySelectorAll(`[id^="fruit_"]`).forEach(element => fruitList.push(element.id));  
 
+        /*
         function getRandomArbitrary(min, max) {
             return Math.random() * (max - min) + min;
           } 
+          */
 
         //create first initial fruit
         let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
         let randomFruitPool = "pool__" + randomFruitFromList.substring(6);
 
+        //console.log("*-*-*-*-*-" + randomFruitFromList);
 
         //firstFruit = document.querySelector('#fruit_pineapplepool').components["pool__pineapplepool"].requestEntity();
         let firstFruit = document.querySelector('#' + randomFruitFromList).components[randomFruitPool].requestEntity();
+        //firstFruit.object3D.position.y += 50;
         //document.querySelector('#' + randomFruitFromList).object3D.rotation.y += 2
 
         el.addEventListener("hitstart", function fruitCollisionHandler(event) {
@@ -37,26 +41,29 @@ AFRAME.registerComponent('fruit-create', {
             
 /*           let fruitPool = event.target.components["aabb-collider"]["intersectedEls"].map(x => x.id)[0].substring(6);
              let fullpoolName = "pool__" + fruitPool;
-*/
-/*          let TTT = document.querySelector('#fruit_' + fruitPool ).object3D.rotation;
+
+          let TTT = document.querySelector('#fruit_' + fruitPool ).object3D.rotation;
             TTT.y += 10;
             console.log("-+-+-+-+-+-+-+-+-+-+-+-+-")
             console.log("TEST is: " , TTT) 
             firstFruit = document.querySelector('#fruit_' + fruitPool ).components[fullpoolName].requestEntity();
-*/
-
-            console.log("GET FROM POOL");
-            console.log("******************************************")
-
- /*           document.querySelector('#fruit_'+ fruitPool).components[fullpoolName].returnEntity(firstFruit);
+            
+            document.querySelector('#fruit_'+ fruitPool).components[fullpoolName].returnEntity(firstFruit);
              firstFruit = document.querySelector('#fruit_' + fruitPool ).components[fullpoolName].requestEntity();
 */
-            
+      
+            console.log("******************************************")
+            console.log("GET FROM POOL");
+
             //Get random fruit from pool
             let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
             let correctFruitPool = 'pool__' + randomFruitFromList.substring(6);
 
+            /*
             firstFruit = document.querySelector('#' + randomFruitFromList ).components[correctFruitPool].requestEntity();
+
+            console.log("GOT FROM POOL: " + correctFruitPool);
+            console.log("******************************************")
 
             console.log("Set Fruit Position:");
             console.log("******************************************")
@@ -68,16 +75,35 @@ AFRAME.registerComponent('fruit-create', {
             const cylinderMin = -0.5*1.1;
             const cylinderMax = 0.5*1.1;
 
-            //X-Axis Info (should be around 50-100) ;
-            let xAxis = data.orbit.object3D.rotation.y - (data.movement * Math.random() );
+            let xAxis = 0;
+            if (Math.random() < 0.5)
+            {
+                 xAxis = data.orbit.object3D.rotation.y - (data.movement * Math.random() );
+                 if (Math.random() < 0.25)
+                 {
+                    xAxis = ((xAxis % maxRotation) + maxRotation) % maxRotation;
+                 }
+                 
+            }
+            else
+            {
+                 xAxis = data.orbit.object3D.rotation.y + (data.movement * Math.random() ); 
+                 if (Math.random() > 0.75)
+                 {
+                    xAxis = ((xAxis % maxRotation) + maxRotation) % maxRotation;
+                 }
+            }
+
             //let xAxis = data.orbit.object3D.rotation.y - getRandomArbitrary(0, data.movement);
-            xAxis = ((xAxis % maxRotation) + maxRotation) % maxRotation;
+            //xAxis = ((xAxis % maxRotation) + maxRotation) % maxRotation;
 
             console.log("xAxis: " + xAxis)
             //Final Animation
             //let fruitRotation = [xAxis, data.orbit.object3D.rotation.y, data.orbit.object3D.rotation.z]
             //data.orbit.setAttribute('animation__fruit', 'property: rotation; to: 0, `${xAxis}`, 0; easing: easeOutElastic' );
             data.orbit.setAttribute('animation__fruit', `property: rotation; to: 0 ${xAxis*10} 0; easing: easeOutElastic; elasticity: 1000 ` );
+
+            */
 
 /*            
             //console.log("Selected Fruit: " + randomFruitFromList + " & POOL NAME IS " + correctFruitPool )
