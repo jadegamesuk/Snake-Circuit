@@ -12,27 +12,13 @@ AFRAME.registerComponent('fruit-create', {
         this.tick = AFRAME.utils.throttleTick(this.tick, 20, this);
 
         //get list of fruit
-        //let fruitclassList = document.getElementsByClassName("fruit");
         let fruitList = [];
-
         document.querySelectorAll(`[id^="fruit_"]`).forEach(element => fruitList.push(element.id));  
 
-        /*
-        function getRandomArbitrary(min, max) {
-            return Math.random() * (max - min) + min;
-          } 
-          */
-
-        //create first initial fruit
-        let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
-        let randomFruitPool = "pool__" + randomFruitFromList.substring(6);
-
-        //console.log("*-*-*-*-*-" + randomFruitFromList);
-
-        //firstFruit = document.querySelector('#fruit_pineapplepool').components["pool__pineapplepool"].requestEntity();
-        let firstFruit = document.querySelector('#' + randomFruitFromList).components[randomFruitPool].requestEntity();
-        //firstFruit.object3D.position.y += 50;
-        //document.querySelector('#' + randomFruitFromList).object3D.rotation.y += 2
+        //select initial fruit to display
+        //let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
+        //let randomFruitPool = "pool__" + randomFruitFromList.substring(6);
+        //let firstFruit = document.querySelector('#' + randomFruitFromList).components[randomFruitPool].requestEntity();
 
         el.addEventListener("hitstart", function fruitCollisionHandler(event) {
 
@@ -59,7 +45,6 @@ AFRAME.registerComponent('fruit-create', {
             let randomFruitFromList = fruitList[Math.floor(Math.random() * fruitList.length)];
             let correctFruitPool = 'pool__' + randomFruitFromList.substring(6);
 
-            /*
             firstFruit = document.querySelector('#' + randomFruitFromList ).components[correctFruitPool].requestEntity();
 
             console.log("GOT FROM POOL: " + correctFruitPool);
@@ -103,7 +88,6 @@ AFRAME.registerComponent('fruit-create', {
             //data.orbit.setAttribute('animation__fruit', 'property: rotation; to: 0, `${xAxis}`, 0; easing: easeOutElastic' );
             data.orbit.setAttribute('animation__fruit', `property: rotation; to: 0 ${xAxis*10} 0; easing: easeOutElastic; elasticity: 1000 ` );
 
-            */
 
 /*            
             //console.log("Selected Fruit: " + randomFruitFromList + " & POOL NAME IS " + correctFruitPool )

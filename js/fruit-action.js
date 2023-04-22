@@ -18,6 +18,8 @@ AFRAME.registerComponent('fruit-action', {
             //adding event listener
             el.addEventListener('hitstart', snakeCollisionHandler); 
 
+
+
         });
 
     }
