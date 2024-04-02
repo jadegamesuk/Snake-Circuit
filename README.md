@@ -1,5 +1,14 @@
-# Snake Circuit 
-Cloned from the boilerplate template to make this PWA compatible.
+# Snake Circuit ![Javascript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![HTML5](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+## Connect with me:
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://uk.linkedin.com/in/efe-enobakhare)
+
+## Description
+Working to create a free VR Snake game. Utilising javascript and Aframe to get things working. Cloned from the boilerplate template to make this PWA compatible. This is a project that I created to work on my JavaScript skills. Somewhat buggy but a fun project to test out WebXR technology
+
+## Demo
+![SnakeVR](https://github.com/jadegamesuk/Snake-Circuit/assets/39485724/64a6373b-e0f9-4c5c-be26-66ea25ed7f52)
+
+
 
 ## To Do
 - ~Create environment and basic level~
@@ -7,22 +16,15 @@ Cloned from the boilerplate template to make this PWA compatible.
 - ~Ensure additional spheres can be created correctly~
 - Ensure additional spheres can also move correctly
 - Add controls via controller
-- Screen shake!
 - Add apples to eat
 
-## Guide to converting PWA to APK for Oculus (Run from Windows 10 VM)
+### Instructions to convert PWA to APK for Oculus (Windows)
 
-### Create APK file
+#### Create APK file
 
-C:\Users\Efe\Documents\ovr-platform-util-pwa\ovr-platform-util.exe create-pwa -o V:\test.apk --android-sdk C:\Users\Efe\Documents\build-tools\sdk --manifest-content-file C:\Users\Efe\Documents\Template\manifest.webmanifest
-### Send APK to Oculus
+ovr-platform-util.exe create-pwa -o test.apk --android-sdk build-tools\sdk --manifest-content-file Template\manifest.webmanifest
 
-C:\Users\Efe\Documents\platform-tools\adb.exe devices
-C:\Users\Efe\Documents\platform-tools\adb.exe install V:\test.apk
+#### Send APK to Oculus
 
-### Edits
-
-Make changes to the following files:
-- manifest.webmanifest
-- img folder
-- 
+adb.exe devices
+adb.exe install test.apk
