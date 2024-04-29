@@ -20,8 +20,8 @@
   <a-scene renderer="colorManagement: true;" reflection="directionalLight" stats >
 	<a-assets>
 		<a-asset-item id="apple" src="/assets/apple.glb"></a-asset-item>
-		<a-asset-item id="pineapple" src="/assets/pineapple.glb"></a-asset-item>
-		<a-asset-item id="cherries" src="/assets/cherries.glb"></a-asset-item>
+		<!-- <a-asset-item id="pineapple" src="/assets/pineapple.glb"></a-asset-item>
+		<a-asset-item id="cherries" src="/assets/cherries.glb"></a-asset-item> -->
 
 		<img id="sand" src="/assets/Ring/SAND/sand.jpg">
 		<img id="albedo" src="/assets/Ring/albedo.png">
@@ -32,8 +32,8 @@
 		<img id="combined" src="/assets/Ring/combined.png">
 		
 		<a-mixin id="fruit-apple" scale="0.8 0.8 0.8" gltf-model="#apple"  ></a-mixin>
-		<a-mixin id="fruit-pineapple" scale="0.7 0.7 0.7"  gltf-model="#pineapple"></a-mixin>		
-		<a-mixin id="fruit-cherries" scale="0.8 0.8 0.8" gltf-model="#cherries"></a-mixin>	
+		<!-- <a-mixin id="fruit-pineapple" scale="0.7 0.7 0.7"  gltf-model="#pineapple"></a-mixin>		
+		<a-mixin id="fruit-cherries" scale="0.8 0.8 0.8" gltf-model="#cherries"></a-mixin>	 -->
 		
 	</a-assets>
 	<a-camera wasd-controls-enabled="false"></a-camera>
@@ -46,15 +46,16 @@
 	-->
 	<a-entity id="player-wrapper2" score="0" >
 	
-		<a-entity 
+	 	<a-entity 
 			id="fruit_applepool" pool__applepool="mixin: fruit-apple; size: 3"
-			class="fruit" data-aabb-collider-dynamic="true" fruit-action
+			class="fruit" data-aabb-collider-dynamic="true" fruit-action 
 			
 			animation__normalSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3000; pauseEvents: hitstart; resumeEvents: hitend"
 			animation__eatenCycleSize="property: scale; from: 0.8 0.8 0.8; to: 1.1 1.1 1.1; loop: 1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
 			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 150; startEvents: hitstart; pauseEvents: hitend"
 		></a-entity>
- 
+
+	<!-- 
 		<a-entity 
 			id="fruit_pineapplepool" pool__pineapplepool="mixin: fruit-pineapple; size: 3"
 			class="fruit" data-aabb-collider-dynamic="true" fruit-action
@@ -62,8 +63,8 @@
 			animation__normalSpin="property: rotation; from: 0 0 20; to: 0 -360 20; easing: linear; loop: true; dur: 2500; pauseEvents: hitstart; resumeEvents: hitend"
 			animation__eatenCycleSize="property: scale; from: 0.7 0.7 0.7; to: 1.1 1.1 1.1; loop: 1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
 			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 150; startEvents: hitstart; pauseEvents: hitend"
-	></a-entity>
-<!--
+	></a-entity> 
+
 	<a-entity 
 		id="fruit_cherriespool" pool__cherriespool="mixin: fruit-cherries; size: 3"
 		class="fruit" data-aabb-collider-dynamic="true" fruit-action
@@ -78,7 +79,7 @@
     <a-cylinder 
 		id="gameworld" position="0 1.6 0" open-ended="true"
 		radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
-		material="src: #sand; opacity: 0.45; side: double; repeat: 3 1"		
+		material="src: #sand; opacity: 0.30; side: double; repeat: 3 1"		
 		crawling-cursor__snake="target: #snake" 
 		crawling-cursor__apple="target: #fruit_applepool"
 		crawling-cursor__pineapple="target: #fruit_pineapplepool"
@@ -92,7 +93,7 @@
 				mvmt="orbit: #player-wrapper" blending="none" bodyCount="0"
 				aabb-collider="objects: .fruit; debug: true" data-aabb-collider-dynamic="true"
 				score_and_body="orbit: #player-wrapper2" 
-				fruit-create="orbit: #player-wrapper2"
+			 	fruit-create="orbit: #player-wrapper2"
 			></a-sphere>
 		</a-entity>
 
