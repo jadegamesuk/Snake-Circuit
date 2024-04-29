@@ -17,7 +17,7 @@
 
 </head>
 <body>
-  <a-scene renderer="colorManagement: true;" reflection="directionalLight" stats >
+  <a-scene renderer="colorManagement: true;" reflection="directionalLight"  stats >
 	<a-assets>
 		<a-asset-item id="apple" src="/assets/apple.glb"></a-asset-item>
 		<!-- <a-asset-item id="pineapple" src="/assets/pineapple.glb"></a-asset-item>
@@ -45,16 +45,14 @@
 							crawling-cursor="target: #fruit-apple"
 	-->
 	<a-entity id="player-wrapper2" score="0" >
-	
-	 	<a-entity 
-			id="fruit_applepool" pool__applepool="mixin: fruit-apple; size: 3"
-			class="fruit" data-aabb-collider-dynamic="true" fruit-action 
-			
-			animation__normalSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3000; pauseEvents: hitstart; resumeEvents: hitend"
-			animation__eatenCycleSize="property: scale; from: 0.8 0.8 0.8; to: 1.1 1.1 1.1; loop: 1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
-			animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 150; startEvents: hitstart; pauseEvents: hitend"
-		></a-entity>
-
+				<a-entity 
+					id="fruit_applepool" pool__applepool="mixin: fruit-apple; size: 3"
+					class="fruit" data-aabb-collider-dynamic="true" fruit-action 
+					
+					animation__normalSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 3000; pauseEvents: hitstart; resumeEvents: hitend"
+					animation__eatenCycleSize="property: scale; from: 0.8 0.8 0.8; to: 1.1 1.1 1.1; loop: 1; dir: alternate; easing: linear; dur: 100; startEvents: hitstart"
+					animation__eatenSpin="property: rotation; from: 0 0 20; to: 0 360 20; easing: linear; loop: true; dur: 150; startEvents: hitstart; pauseEvents: hitend"
+				></a-entity>
 	<!-- 
 		<a-entity 
 			id="fruit_pineapplepool" pool__pineapplepool="mixin: fruit-pineapple; size: 3"
@@ -82,9 +80,9 @@
 		material="src: #sand; opacity: 0.30; side: double; repeat: 3 1"		
 		crawling-cursor__snake="target: #snake" 
 		crawling-cursor__apple="target: #fruit_applepool"
-		crawling-cursor__pineapple="target: #fruit_pineapplepool"
-		crawling-cursor__cherries="target: #fruit_cherriespool"
 	></a-cylinder>
+
+	<a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity>
 
 		<a-entity id="player-wrapper" >
 			<a-sphere	
