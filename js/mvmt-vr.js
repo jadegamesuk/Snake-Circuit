@@ -21,10 +21,9 @@ AFRAME.registerComponent("mvmtvr", {
       const max = 2*Math.PI;
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
-
     })
 
-    console("Gamepad: " + navigator.getGamepads())
+    alert("Gamepad: " + navigator.getGamepads())
 
     /*
      //Keyboard Movement
