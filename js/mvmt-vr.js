@@ -15,7 +15,7 @@ AFRAME.registerComponent("mvmtvr", {
 
     //VR controller test
     // To be replaced with Axis move
-    el.addEventListener("buttondown", function(event) {
+    el.addEventListener("buttondown", function buttonpressedevent(event) {
      
       //alert("BUTTON PRESSED ON CONTROLLER");
       const max = 2*Math.PI;
