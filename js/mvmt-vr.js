@@ -23,7 +23,7 @@ AFRAME.registerComponent("mvmtvr", {
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     })
 
-    alert("Gamepad: " + navigator.getGamepads())
+    alert("Gamepad: " + navigator.getGamepads().values)
 
     /*
      //Keyboard Movement
