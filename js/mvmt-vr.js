@@ -24,11 +24,23 @@ AFRAME.registerComponent("mvmtvr", {
     })
 
     el.addEventListener("controllerconnected", function(event) {
-     
       alert("CONTROLLER CONNECTED");
 
     })
 
+    el.addEventListener("buttonchanged", function(event) {
+      const max = 2*Math.PI;
+      el.object3D.rotation.z += data.rotateSpeed;
+      el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
+
+    })
+
+    el.addEventListener("touchstart", function(event) {
+      const max = 2*Math.PI;
+      el.object3D.rotation.z += data.rotateSpeed;
+      el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
+
+    })
 
     /*
      //Keyboard Movement
