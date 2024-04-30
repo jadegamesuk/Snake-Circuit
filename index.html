@@ -83,8 +83,6 @@
 		crawling-cursor__apple="target: #fruit_applepool"
 	></a-cylinder>
 
-	<a-entity tracked-controls="controller: 0" mvmtvr="orbit: #player-wrapper"></a-entity>
-
 		<a-entity id="player-wrapper" >
 			<a-sphere	
 				id="snake"
@@ -93,6 +91,7 @@
 				aabb-collider="objects: .fruit; debug: true" data-aabb-collider-dynamic="true"
 				score_and_body="orbit: #player-wrapper2" 
 			 	fruit-create="orbit: #player-wrapper2"
+				 tracked-controls="controller: 0" mvmtvr="orbit: #player-wrapper">
 			></a-sphere>
 		</a-entity>
 	

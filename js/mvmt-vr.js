@@ -15,7 +15,7 @@ AFRAME.registerComponent("mvmtvr", {
 
     //VR controller test
     // To be replaced with Axis move
-    el.addEventListener("buttondown", function buttonpressedevent(event) {
+    el.addEventListener("buttondown", function () {
      
       alert("BUTTON PRESSED ON CONTROLLER");
       const max = 2*Math.PI;
@@ -23,6 +23,8 @@ AFRAME.registerComponent("mvmtvr", {
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
 
     })
+
+    console("Gamepad: " + navigator.getGamepads())
 
     /*
      //Keyboard Movement
