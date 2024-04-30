@@ -1,4 +1,4 @@
-AFRAME.registerComponent("mvmt", {
+AFRAME.registerComponent("mvmtvr", {
   schema: {
     orbit: {type: 'selector', default: '#gameworld'},
     movement: {type: 'number', default: 0.01},
@@ -22,6 +22,7 @@ AFRAME.registerComponent("mvmt", {
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     })
+
 
     /*
      //Keyboard Movement
