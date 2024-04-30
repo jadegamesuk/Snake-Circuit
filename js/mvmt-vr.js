@@ -11,16 +11,22 @@ AFRAME.registerComponent("mvmtvr", {
 
     let el = this.el;
     let data = this.data;
-    let sceneEl = document.querySelector('a-scene');
+   // let sceneEl = document.querySelector('a-scene');
 
     //VR controller test
     // To be replaced with Axis move
     el.addEventListener("buttondown", function(event) {
      
-      alert("BUTTON PRESSED ON CONTROLLER");
+      //alert("BUTTON PRESSED ON CONTROLLER");
       const max = 2*Math.PI;
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
+    })
+
+    el.addEventListener("controllerconnected", function(event) {
+     
+      alert("CONTROLLER CONNECTED");
+
     })
 
 
