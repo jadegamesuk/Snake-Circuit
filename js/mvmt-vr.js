@@ -23,19 +23,7 @@ AFRAME.registerComponent("mvmtvr", {
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     })
 
-    el.addEventListener("controllerconnected", function(event) {
-      alert("CONTROLLER CONNECTED");
-
-    })
-
-    el.addEventListener("buttonchanged", function(event) {
-      const max = 2*Math.PI;
-      el.object3D.rotation.z += data.rotateSpeed;
-      el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
-
-    })
-
-    el.addEventListener("touchstart", function(event) {
+    el.addEventListener("trackpadtouchstart", function(event) {
       const max = 2*Math.PI;
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
