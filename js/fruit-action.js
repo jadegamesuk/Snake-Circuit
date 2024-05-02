@@ -16,8 +16,12 @@ AFRAME.registerComponent("fruit-action", {
         .querySelector("#" + FruitpoolName)
         .components[poolName].returnEntity(el);
 
-      //adding event listener
-      el.addEventListener("hitstart", snakeCollisionHandler);
-    });
-  },
+            //adding event listener
+            el.addEventListener('hitstart', snakeCollisionHandler); 
+
+
+
+        });
+
+    }
 });
