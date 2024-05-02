@@ -23,13 +23,6 @@ AFRAME.registerComponent("mvmtvr", {
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     })
 
-    el.addEventListener("controllerconnected", function () {
-     
-      //alert("CONNECTED CONTROLLER");
-
-    })
-
-
     /*
      //Keyboard Movement
      document.addEventListener('keydown', event => {
