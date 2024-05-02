@@ -12,7 +12,6 @@ AFRAME.registerComponent('score_and_body', {
         //var sceneEl = document.querySelector('a-scene');
 
         el.addEventListener("hitstart", function collisionHandler(event) {
-
               //if fruit collides with snakehead        
               //console.log("COLLISION WITH: " , el.components["aabb-collider"]["intersectedEls"][0])
               let crashCoOrdinates = el.components["aabb-collider"]["intersectedEls"][0].object3D.position // event.target.object3D.position;
