@@ -25,7 +25,7 @@ AFRAME.registerComponent("mvmtvr", {
 
     el.addEventListener("controllerconnected", function () {
      
-      alert("CONNECTED CONTROLLER");
+      //alert("CONNECTED CONTROLLER");
 
     })
 
