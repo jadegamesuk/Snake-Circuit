@@ -46,8 +46,6 @@
 							crawling-cursor="target: #fruit-apple"
 	-->
 
-	<!-- <a-entity laser-controls="hand: left"></a-entity> -->
-
 	<a-entity id="player-wrapper2" score="0" >
 				<a-entity 
 					id="fruit_applepool" pool__applepool="mixin: fruit-apple; size: 3"
@@ -77,6 +75,8 @@
 	></a-entity> -->
 
 	</a-entity>
+
+	<a-entity laser-controls="hand: left"></a-entity>
 		
     <a-cylinder 
 		id="gameworld" position="0 1.6 0" open-ended="true"
@@ -91,7 +91,6 @@
 			<a-sphere	
 				id="snake"
 				tracked-controls="controller: 0; idPrefix: OpenVR" mvmtvr="orbit: #player-wrapper"
-				laser-controls="hand: left"
 				color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
 				mvmt="orbit: #player-wrapper" blending="none" bodyCount="0"
 				aabb-collider="objects: .fruit; debug: true" data-aabb-collider-dynamic="true"
