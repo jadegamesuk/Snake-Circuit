@@ -15,15 +15,6 @@ AFRAME.registerComponent("mvmt", {
 
     //VR controller test
     // To be replaced with Axis move
-    el.addEventListener("buttondown", function(event) {
-
-      console.log("******************************************")
-      console.log("BUTTON PRESSED ON CONTROLLER");
-      //alert("BUTTON PRESSED ON CONTROLLER");
-      const max = 2*Math.PI;
-      el.object3D.rotation.z += data.rotateSpeed;
-      el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
-    })
 
      //Keyboard Movement
      document.addEventListener('keydown', event => {
