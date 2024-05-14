@@ -123,6 +123,7 @@ AFRAME.registerComponent("mvmt", {
           el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
         }
       }
+      
     }
 
 });

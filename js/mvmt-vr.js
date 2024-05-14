@@ -17,31 +17,11 @@ AFRAME.registerComponent("mvmtvr", {
     // To be replaced with Axis move
     el.addEventListener("buttondown", function () {
      
-      //alert("BUTTON PRESSED ON CONTROLLER");
       const max = 2*Math.PI;
       el.object3D.rotation.z += data.rotateSpeed;
       el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
     })
 
-    /*
-     //Keyboard Movement
-     document.addEventListener('keydown', event => {
-     
-      //Modulo for rotation angles
-      const max = 2*Math.PI;
-  
-        if (event.code === 'ArrowLeft') {
-          //rotate snake counter-clockwise
-          el.object3D.rotation.z += data.rotateSpeed;
-          el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
-        }
-        if (event.code === 'ArrowRight') {
-          //rotate snake clockwise
-          el.object3D.rotation.z -= data.rotateSpeed;
-          el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max;
-        }
-      })
-      */
   },
 
   tick: function  (_t, _dt) {
@@ -53,29 +33,6 @@ AFRAME.registerComponent("mvmtvr", {
 
     //Modulo for rotation angles
     const maxRotation = 2*Math.PI;
-
-    //OLD gamepad controller code  
-    /* 
-    if (navigator.getGamepads().hasOwnProperty("0") )
-    {
-       let test = Object.values(navigator.getGamepads()[0].axes)[1]
-       //console.log(test);
-
-      //if Left is pressed
-      if (test == 1) {
-        //rotate snake counter-clockwise
-        el.object3D.rotation.z += data.rotateSpeed * slowdown;
-        el.object3D.rotation.z = ((el.object3D.rotation.z % maxRotation) + maxRotation) % maxRotation; 
-      } 
-
-      //if Right is pressed
-      if (test == -1) {
-        //rotate snake clockwise
-        el.object3D.rotation.z -= data.rotateSpeed * slowdown;
-        el.object3D.rotation.z = ((el.object3D.rotation.z % maxRotation) + maxRotation) % maxRotation; 
-      }
-    }
-    */
 
     //clamp number
     const cylinderMin = -0.5*1.1;
