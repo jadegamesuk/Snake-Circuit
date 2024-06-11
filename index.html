@@ -9,7 +9,6 @@
 <script src="www/aframe-crawling-cursor.js"></script>
 <script src="www/aframe-aabb-collider-component.min.js"></script>
 <script src="www/aframe-geometry-merger-component.min.js"></script>
-<script src="js/mvmt.js"></script>
 <script src="js/mvmt-vr.js"></script>
 <script src="js/textures.js"></script>
 <script src="js/score_and_body.js"></script>
@@ -45,7 +44,6 @@
 					ambientOcclusionMap: #ao; normalMap: #normal; roughnessMap: #roughness
 							crawling-cursor="target: #fruit-apple"
 	-->
-
 	<a-entity id="player-wrapper2" score="0" >
 				<a-entity 
 					id="fruit_applepool" pool__applepool="mixin: fruit-apple; size: 3"
@@ -76,8 +74,6 @@
 
 	</a-entity>
 
-	<!--  <a-entity laser-controls="hand: left"></a-entity>  -->
-		
     <a-cylinder 
 		id="gameworld" position="0 1.6 0" open-ended="true"
 		radius-bottom="0.2" radius-top="0.2" height="1" radius="0.7"
@@ -86,12 +82,16 @@
 		crawling-cursor__apple="target: #fruit_applepool"
 	></a-cylinder>
 
-	<!-- 				laser-controls="hand: left"-->
-	<!--  <a-entity tracked-controls="controller: 0; idPrefix: OpenVR"></a-entity> mvmt="orbit: #player-wrapper" -->
+
+	<a-entity 
+		id="VR-controls" 
+		mvmtvr="orbit: #player-wrapper"
+		tracked-controls="controller: 0; idPrefix: OpenVR; hand: left">
+	</a-entity>
+
 		<a-entity id="player-wrapper" >
 			<a-sphere	
-				id="snake"
-				tracked-controls="controller: 0; idPrefix: OpenVR; hand: left" mvmtvr="orbit: #player-wrapper"
+				id="snake" 
 				color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
 				blending="none" bodyCount="0"
 				aabb-collider="objects: .fruit" data-aabb-collider-dynamic="true"
@@ -100,10 +100,10 @@
 			></a-sphere>
 		</a-entity>
 	
-
+		<!-- class="ignore-ray" -->
 		<a-entity 
 			id="snakebodies" geometry-merger="preserveOriginal: false" material="color: #AAA" 
-			class="ignore-ray"
+		 	
 		></a-entity>
 		
   </a-scene>

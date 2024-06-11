@@ -13,8 +13,7 @@ AFRAME.registerComponent("mvmtvr", {
     let data = this.data;
    // let sceneEl = document.querySelector('a-scene');
 
-    //VR controller test
-    // To be replaced with Axis move
+    //VR controller code
     el.addEventListener("buttondown", function () {
      
       const max = 2*Math.PI;

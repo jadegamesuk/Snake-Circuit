@@ -83,8 +83,6 @@
 	            data.target = cursor;
 	        }
 
-			//console.log("TEST: " + Object.values(data.target))
-
 	        el.addEventListener("raycaster-intersection", function(e) {
 
 	            var intersection = getNearestIntersection(e.detail.intersections);

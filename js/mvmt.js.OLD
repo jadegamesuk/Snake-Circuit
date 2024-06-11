@@ -17,6 +17,7 @@ AFRAME.registerComponent("mvmt", {
     // To be replaced with Axis move
 
      //Keyboard Movement
+     /*
      document.addEventListener('keydown', event => {
      
       //Modulo for rotation angles
@@ -33,6 +34,7 @@ AFRAME.registerComponent("mvmt", {
           el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max;
         }
       })
+      */
   },
 
   tick: function  (_t, _dt) {
@@ -104,7 +106,6 @@ AFRAME.registerComponent("mvmt", {
           el.object3D.rotation.z = ((el.object3D.rotation.z % radiansmax ) + radiansmax) % radiansmax;
         }
     }
-
     //wrapping around bottom edge code
       if (data.orbit.object3D.position.y <= cylinderMin ) {
 

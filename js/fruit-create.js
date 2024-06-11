@@ -68,7 +68,6 @@ AFRAME.registerComponent('fruit-create', {
                  {
                     xAxis = ((xAxis % maxRotation) + maxRotation) % maxRotation;
                  }
-                 
             }
             else
             {
