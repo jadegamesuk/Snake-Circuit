@@ -18,29 +18,20 @@ AFRAME.registerComponent("mvmtvr", {
     const max = 2*Math.PI;
 
     //VR controls
-    el.addEventListener('axismove', function () {
-     
-      //alert(document.querySelector('#VR-controls').components["track-controls"].axis)
+    el.addEventListener('buttondown', function () {   
+      //data.angle += data.rotateSpeed
+      //data.headmovement.object3D.rotation.z = data.angle
 
-      //Left Movement
-      if (document.querySelector('#VR-controls').components["track-controls"].axis[0] = -1)
-        {
-          data.angle += data.rotateSpeed
-          data.headmovement.object3D.rotation.z = data.angle
-        }
-        /*
-      if (document.querySelector('#VR-controls').components["track-controls"].axis[1] = -1)
-        {
-          data.angle += data.rotateSpeed
-          data.headmovement.object3D.rotation.z = data.angle
-        }      
-        if (document.querySelector('#VR-controls').components["track-controls"].axis[2] = -1)
-        {
-          data.angle += data.rotateSpeed
-          data.headmovement.object3D.rotation.z = data.angle
-        } 
-        */ 
-    }),
+      el.addEventListener('axismove', function () {
+  
+        //Left Movement
+        if (document.querySelector('#VR-controls').components["tracked-controls"].axis[0] = 1.0)
+          {
+            //data.angle += data.rotateSpeed
+            //data.headmovement.object3D.rotation.z = data.angle
+          }
+      })
+    })
 
     //Keyboard check Start
     document.addEventListener('keydown', event => {
@@ -58,10 +49,7 @@ AFRAME.registerComponent("mvmtvr", {
       }),    
     //Keyboard check End
     
-      el.addEventListener('buttondown', function () {   
-          //data.angle += data.rotateSpeed
-          //data.headmovement.object3D.rotation.z = data.angle
-    })
+
 
   },
 
