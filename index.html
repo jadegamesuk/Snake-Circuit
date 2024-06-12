@@ -82,29 +82,28 @@
 		crawling-cursor__apple="target: #fruit_applepool"
 	></a-cylinder>
 
-
 	<a-entity 
 		id="VR-controls" 
-		mvmtvr="orbit: #player-wrapper"
+		mvmtvr="orbit: #player-wrapper; headmovement: #snake"
 		tracked-controls="controller: 0; idPrefix: OpenVR; hand: left">
 	</a-entity>
 
-		<a-entity id="player-wrapper" >
-			<a-sphere	
-				id="snake" 
-				color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
-				blending="none" bodyCount="0"
-				aabb-collider="objects: .fruit" data-aabb-collider-dynamic="true"
-				score_and_body="orbit: #player-wrapper2" 
-			 	fruit-create="orbit: #player-wrapper2"
-			></a-sphere>
-		</a-entity>
+	<a-entity id="player-wrapper" >
+		<a-sphere	
+			id="snake" 
+			color="Firebrick" radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
+			blending="none" bodyCount="0"
+			aabb-collider="objects: .fruit" data-aabb-collider-dynamic="true"
+			score_and_body="orbit: #player-wrapper2" 
+			fruit-create="orbit: #player-wrapper2"
+		></a-sphere>
+	</a-entity>
 	
 		<!-- class="ignore-ray" -->
-		<a-entity 
-			id="snakebodies" geometry-merger="preserveOriginal: false" material="color: #AAA" 
-		 	
-		></a-entity>
+	<a-entity 
+		id="snakebodies" geometry-merger="preserveOriginal: false" material="color: #AAA" 
+
+	></a-entity>
 		
   </a-scene>
 </body>

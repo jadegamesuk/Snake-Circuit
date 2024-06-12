@@ -2,8 +2,10 @@ AFRAME.registerComponent("mvmtvr", {
   schema: {
     orbit: {type: 'selector', default: '#gameworld'},
     movement: {type: 'number', default: 0.01},
-    rotateSpeed: {type: 'number', default: 0.3},
-    innerWall: {type: 'boolean', default: true}
+    rotateSpeed: {type: 'number', default: 0.5},
+    innerWall: {type: 'boolean', default: true},
+    angle: {type: 'number', default: 0},
+    headmovement: {type: 'selector', default: '#gameworld'}
   },
 
   init: function() {
@@ -11,14 +13,54 @@ AFRAME.registerComponent("mvmtvr", {
 
     let el = this.el;
     let data = this.data;
-   // let sceneEl = document.querySelector('a-scene');
 
-    //VR controller code
-    el.addEventListener("buttondown", function () {
+    //Modulo for rotation angles
+    const max = 2*Math.PI;
+
+    //VR controls
+    el.addEventListener('axismove', function () {
      
-      const max = 2*Math.PI;
-      el.object3D.rotation.z += data.rotateSpeed;
-      el.object3D.rotation.z = ((el.object3D.rotation.z % max) + max) % max; 
+      //alert(document.querySelector('#VR-controls').components["track-controls"].axis)
+
+      //Left Movement
+      if (document.querySelector('#VR-controls').components["track-controls"].axis[0] = -1)
+        {
+          data.angle += data.rotateSpeed
+          data.headmovement.object3D.rotation.z = data.angle
+        }
+        /*
+      if (document.querySelector('#VR-controls').components["track-controls"].axis[1] = -1)
+        {
+          data.angle += data.rotateSpeed
+          data.headmovement.object3D.rotation.z = data.angle
+        }      
+        if (document.querySelector('#VR-controls').components["track-controls"].axis[2] = -1)
+        {
+          data.angle += data.rotateSpeed
+          data.headmovement.object3D.rotation.z = data.angle
+        } 
+        */ 
+    }),
+
+    //Keyboard check Start
+    document.addEventListener('keydown', event => {
+      
+        if (event.code === 'ArrowLeft') {
+          //rotate snake counter-clockwise
+          data.angle += data.rotateSpeed
+          data.headmovement.object3D.rotation.z = data.angle
+        }
+        if (event.code === 'ArrowRight') {
+          //rotate snake counter-clockwise
+          data.angle -= data.rotateSpeed
+          data.headmovement.object3D.rotation.z = data.angle
+        }
+      }),    
+    //Keyboard check End
+    
+      el.addEventListener('buttondown', function () {   
+          //data.angle += data.rotateSpeed
+          //data.headmovement.object3D.rotation.z = data.angle
     })
 
   },
@@ -28,7 +70,8 @@ AFRAME.registerComponent("mvmtvr", {
     let el = this.el;
     let data = this.data;
     
-    let angle = (el.object3D.rotation.z)
+    //data.angle = data.orbit.object3D.rotation.z
+    //let axiscontrol = document.querySelector('#VR-controls').components["track-controls"].axis
 
     //Modulo for rotation angles
     const maxRotation = 2*Math.PI;
@@ -43,11 +86,11 @@ AFRAME.registerComponent("mvmtvr", {
     const clamp = (num, cylinderMin, cylinderMax) => Math.min(Math.max(num, cylinderMin), cylinderMax);
 
     //horizontal movement
-    data.orbit.object3D.rotation.y -= data.movement * Math.cos(angle);
+    data.orbit.object3D.rotation.y -= data.movement * Math.cos(data.angle);
     data.orbit.object3D.rotation.y = ((data.orbit.object3D.rotation.y % maxRotation) + maxRotation) % maxRotation; 
 
     //vertical movement clamped at top and bottom
-    data.orbit.object3D.position.y += data.movement * Math.sin(angle); 
+    data.orbit.object3D.position.y += data.movement * Math.sin(data.angle); 
     data.orbit.object3D.position.y = clamp(data.orbit.object3D.position.y, cylinderMin, cylinderMax);
 
       //wrapping around top edge code
