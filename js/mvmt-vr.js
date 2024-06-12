@@ -20,8 +20,6 @@ AFRAME.registerComponent("mvmtvr", {
     //VR controls
     el.addEventListener('touchstart', function () {   
 
-      el.addEventListener('buttondown', function () {   
-
           el.addEventListener('axismove', function () {
             //Turn Right 
             if (document.querySelector('#VR-controls').components["tracked-controls"].axis[0] >= 0.90)
@@ -36,8 +34,6 @@ AFRAME.registerComponent("mvmtvr", {
                 data.headmovement.object3D.rotation.z = data.angle
               }
           })
-      })
-
     })
 
     //Keyboard controls
