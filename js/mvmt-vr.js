@@ -2,7 +2,7 @@ AFRAME.registerComponent("mvmtvr", {
   schema: {
     orbit: {type: 'selector', default: '#gameworld'},
     movement: {type: 'number', default: 0.01},
-    rotateSpeed: {type: 'number', default: 0.5},
+    rotateSpeed: {type: 'number', default: 0.20},
     innerWall: {type: 'boolean', default: true},
     angle: {type: 'number', default: 0},
     headmovement: {type: 'selector', default: '#gameworld'}
@@ -18,22 +18,29 @@ AFRAME.registerComponent("mvmtvr", {
     const max = 2*Math.PI;
 
     //VR controls
-    el.addEventListener('buttondown', function () {   
-      //data.angle += data.rotateSpeed
-      //data.headmovement.object3D.rotation.z = data.angle
+    el.addEventListener('touchstart', function () {   
 
-      el.addEventListener('axismove', function () {
-  
-        //Left Movement
-        if (document.querySelector('#VR-controls').components["tracked-controls"].axis[0] = 1.0)
-          {
-            //data.angle += data.rotateSpeed
-            //data.headmovement.object3D.rotation.z = data.angle
-          }
+      el.addEventListener('buttondown', function () {   
+
+          el.addEventListener('axismove', function () {
+            //Turn Right 
+            if (document.querySelector('#VR-controls').components["tracked-controls"].axis[0] >= 0.90)
+              {
+                data.angle -= data.rotateSpeed
+                data.headmovement.object3D.rotation.z = data.angle
+              }
+            //Turn Left
+            if (document.querySelector('#VR-controls').components["tracked-controls"].axis[0] <= -0.90)
+              {
+                data.angle += data.rotateSpeed
+                data.headmovement.object3D.rotation.z = data.angle
+              }
+          })
       })
+
     })
 
-    //Keyboard check Start
+    //Keyboard controls
     document.addEventListener('keydown', event => {
       
         if (event.code === 'ArrowLeft') {
@@ -46,10 +53,7 @@ AFRAME.registerComponent("mvmtvr", {
           data.angle -= data.rotateSpeed
           data.headmovement.object3D.rotation.z = data.angle
         }
-      }),    
-    //Keyboard check End
-    
-
+      })    
 
   },
 
