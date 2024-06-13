@@ -18,6 +18,7 @@ AFRAME.registerComponent("mvmtvr", {
     const max = 2*Math.PI;
 
     //VR controls
+    // This needs to be totally re-written!
     el.addEventListener('touchstart', function () {   
 
           el.addEventListener('axismove', function () {
