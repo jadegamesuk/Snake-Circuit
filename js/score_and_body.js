@@ -10,10 +10,14 @@ AFRAME.registerComponent('score_and_body', {
         let el = this.el;
         //let data = this.data;
         //var sceneEl = document.querySelector('a-scene');
+        //let apple_eat = document.querySelector('#apple-crunch');
 
         el.addEventListener("hitstart", function collisionHandler(event) {
               //if fruit collides with snakehead        
-              //console.log("COLLISION WITH: " , el.components["aabb-collider"]["intersectedEls"][0])
+              //play sound of eating apple
+              
+              //apple_eat.components.sound.playSound();
+
               let crashCoOrdinates = el.components["aabb-collider"]["intersectedEls"][0].object3D.position // event.target.object3D.position;
 
               // Set score value
@@ -28,21 +32,24 @@ AFRAME.registerComponent('score_and_body', {
 
               console.log("Snake Body Count: " + snakeBodyCount + " Snake Score: " + snakeScore);
 
+              //increase snake speed
+              //document.querySelector('#snake').getAttribute('score_and_body')['appleCount']
+              //document.querySelector('#VR-controls').components.mvmtvr.data.movement
+              //document.querySelector('#VR-controls').getAttribute('mvmtvr')
+              document.querySelector('#VR-controls').getAttribute('mvmtvr')['movement'] += 0.003 
+              //console.log("MVMT value is: " + document.querySelector('#VR-controls').getAttribute('components','movement'))
+
+
               //Create First Snake Body
                   snakeBodyCount = "Body"+ snakeBodyCount
     
                   window.snakeBodyCount = document.createElement('a-sphere');
                   window.snakeBodyCount.setAttribute('geometry', 'radius', 0.05)
                   window.snakeBodyCount.setAttribute('position',crashCoOrdinates);
-                  window.snakeBodyCount.setAttribute('material','color','Firebrick')
+                  window.snakeBodyCount.setAttribute('material','src','../assets/scales.jpg')
                   window.snakeBodyCount.setAttribute('id', snakeBodyCount )
                   window.snakeBodyCount.setAttribute('class','ignore-ray')
                  document.querySelector('#snakebodies').appendChild(window.snakeBodyCount) 
-
-              //removing event listener
-              //el.removeEventListener('hitstart', collisionHandler)
-              //adding event listener
-              //el.addEventListener('hitstart', collisionHandler)
         })
            
 },
@@ -52,7 +59,7 @@ AFRAME.registerComponent('score_and_body', {
               this.entities = document.querySelectorAll('a-sphere');
               if (this.entities.length >= 2)
               {   
-                let move = 0.2; 
+                let move = 0.2 + document.querySelector('#VR-controls').getAttribute('mvmtvr')['movement']; 
 
                   for (let i = 1; i < this.entities.length; i++) {
       

@@ -5,6 +5,7 @@ AFRAME.registerComponent("mvmtvr", {
     rotateSpeed: {type: 'number', default: 0.20},
     innerWall: {type: 'boolean', default: true},
     angle: {type: 'number', default: 0},
+    axismoveangle: {type: 'number', default: 0},
     headmovement: {type: 'selector', default: '#gameworld'}
   },
 
@@ -14,27 +15,22 @@ AFRAME.registerComponent("mvmtvr", {
     let el = this.el;
     let data = this.data;
 
-    //Modulo for rotation angles
-    const max = 2*Math.PI;
-
     //VR controls
-    // This needs to be totally re-written!
-    el.addEventListener('touchstart', function () {   
+    el.addEventListener('axismove', function () {
+      let axisX = document.querySelector('#VR-controls').components["tracked-controls"].axis[0]
+      let axisY = document.querySelector('#VR-controls').components["tracked-controls"].axis[1]
+      data.axismoveangle = -Math.atan2(axisY, axisX)
 
-          el.addEventListener('axismove', function () {
-            //Turn Right 
-            if (document.querySelector('#VR-controls').components["tracked-controls"].axis[0] >= 0.90)
-              {
-                data.angle -= data.rotateSpeed
-                data.headmovement.object3D.rotation.z = data.angle
-              }
-            //Turn Left
-            if (document.querySelector('#VR-controls').components["tracked-controls"].axis[0] <= -0.90)
-              {
-                data.angle += data.rotateSpeed
-                data.headmovement.object3D.rotation.z = data.angle
-              }
-          })
+      //VR Turning Controls 
+      data.angle = data.axismoveangle
+      data.headmovement.object3D.rotation.z = data.axismoveangle
+    })
+
+    el.addEventListener('touchend', function () {
+
+      //VR Turning Controls 
+      data.angle = data.axismoveangle
+      data.headmovement.object3D.rotation.z = data.axismoveangle
     })
 
     //Keyboard controls
@@ -50,17 +46,13 @@ AFRAME.registerComponent("mvmtvr", {
           data.angle -= data.rotateSpeed
           data.headmovement.object3D.rotation.z = data.angle
         }
-      })    
-
+      }) 
   },
 
   tick: function  (_t, _dt) {
 
     let el = this.el;
     let data = this.data;
-    
-    //data.angle = data.orbit.object3D.rotation.z
-    //let axiscontrol = document.querySelector('#VR-controls').components["track-controls"].axis
 
     //Modulo for rotation angles
     const maxRotation = 2*Math.PI;
