@@ -3,28 +3,14 @@
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://uk.linkedin.com/in/efe-enobakhare)
 
 ## Description
-Working to create a free VR Snake game. Utilising javascript and Aframe to get things working. Cloned from the boilerplate template to make this PWA compatible. This is a project that I created to work on my JavaScript skills. Somewhat buggy but a fun project to test out WebXR technology
+I created a VR Snake game. Utilising javascript and A-Frame to get things working. This game is PWA compatible so I'm hoping one day when Meta fully integrate PWA apps that this will be easily included! This is a project has made me a better and HTML formatting & using JavaScript. There is a small to-do list, but this is a funny functional product. Feel free to play this game at https://jadegamesuk.netlify.app/ either in VR 🥽 or on your computer 💻🖥️
 
 ## Demo
 ![SnakeVR](https://github.com/jadegamesuk/Snake-Circuit/assets/39485724/64a6373b-e0f9-4c5c-be26-66ea25ed7f52)
 
-
-
 ## To Do
 - ~Create environment and basic level~
-- ~Ensure a single sphere can move along cylinder correctly~
-- ~Ensure additional spheres can be created correctly~
-- Ensure additional spheres can also move correctly
-- Add controls via controller
-- Add apples to eat
-
-### Instructions to convert PWA to APK for Oculus (Windows)
-
-#### Create APK file
-
-ovr-platform-util.exe create-pwa -o test.apk --android-sdk build-tools\sdk --manifest-content-file Template\manifest.webmanifest
-
-#### Send APK to Oculus
-
-adb.exe devices
-adb.exe install test.apk
+- ~Add VR controls via controller~
+- ~Add BGM and sound effects~
+- Add title scteen
+- Add eyes to snake head
