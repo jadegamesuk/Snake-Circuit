@@ -8,23 +8,24 @@ AFRAME.registerComponent('score_and_body', {
         this.tick = AFRAME.utils.throttleTick(this.tick, 20, this);
 
         let el = this.el;
-        //let data = this.data;
-        //var sceneEl = document.querySelector('a-scene');
-        //let apple_eat = document.querySelector('#apple-crunch');
+        let data = this.data;
+        let sound_apple_crunch = document.querySelector('#sound-apple-crunch');
 
         el.addEventListener("hitstart", function collisionHandler(event) {
-              //if fruit collides with snakehead        
+              //if fruit collides with snakehead
               //play sound of eating apple
-              
-              //apple_eat.components.sound.playSound();
+              sound_apple_crunch.components.sound.pauseSound();
+              sound_apple_crunch.components.sound.playSound();
 
-              let crashCoOrdinates = el.components["aabb-collider"]["intersectedEls"][0].object3D.position // event.target.object3D.position;
+              let crashCoOrdinates = el.components["aabb-collider"]["intersectedEls"][0].object3D.position 
 
               // Set score value
               let snakeScore = document.querySelector('#player-wrapper2').getAttribute('score')
               snakeScore = Number(snakeScore) + 5;
+
               document.querySelector('#player-wrapper2').setAttribute('score', snakeScore)
-  
+              document.querySelector('#showscore').setAttribute('value',snakeScore) 
+
               // set snake bodycount
               let snakeBodyCount = document.querySelector('#snake').getAttribute('bodyCount')
               snakeBodyCount = Number(snakeBodyCount) + 1;
@@ -33,12 +34,7 @@ AFRAME.registerComponent('score_and_body', {
               console.log("Snake Body Count: " + snakeBodyCount + " Snake Score: " + snakeScore);
 
               //increase snake speed
-              //document.querySelector('#snake').getAttribute('score_and_body')['appleCount']
-              //document.querySelector('#VR-controls').components.mvmtvr.data.movement
-              //document.querySelector('#VR-controls').getAttribute('mvmtvr')
-              document.querySelector('#VR-controls').getAttribute('mvmtvr')['movement'] += 0.003 
-              //console.log("MVMT value is: " + document.querySelector('#VR-controls').getAttribute('components','movement'))
-
+              document.querySelector('#VR-controls').getAttribute('mvmtvr')['movement'] += 0.0005 
 
               //Create First Snake Body
                   snakeBodyCount = "Body"+ snakeBodyCount
@@ -59,7 +55,7 @@ AFRAME.registerComponent('score_and_body', {
               this.entities = document.querySelectorAll('a-sphere');
               if (this.entities.length >= 2)
               {   
-                let move = 0.2 + document.querySelector('#VR-controls').getAttribute('mvmtvr')['movement']; 
+                let move = 0.3 + document.querySelector('#VR-controls').getAttribute('mvmtvr')['movement']; 
 
                   for (let i = 1; i < this.entities.length; i++) {
       

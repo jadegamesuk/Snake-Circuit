@@ -9,9 +9,9 @@ AFRAME.registerComponent("fruit-action", {
       // Returning Fruit to Pool
       let FruitpoolName = event.target.id;
       let poolName = "pool__" + FruitpoolName.substring(6);
-      console.log("============================");
-      console.log("Pool Name: ", poolName);
-      console.log("Fruit Is: ", FruitpoolName);
+      //console.log("============================");
+      //console.log("Pool Name: ", poolName);
+      //console.log("Fruit Is: ", FruitpoolName);
       document
         .querySelector("#" + FruitpoolName)
         .components[poolName].returnEntity(el);

@@ -15,8 +15,13 @@ AFRAME.registerComponent("mvmtvr", {
     let el = this.el;
     let data = this.data;
 
+    let sound_bgm = document.querySelector('#sound-bgm');
+
     //VR controls
     el.addEventListener('axismove', function () {
+
+      sound_bgm.components.sound.playSound();
+
       let axisX = document.querySelector('#VR-controls').components["tracked-controls"].axis[0]
       let axisY = document.querySelector('#VR-controls').components["tracked-controls"].axis[1]
       data.axismoveangle = -Math.atan2(axisY, axisX)
@@ -35,11 +40,16 @@ AFRAME.registerComponent("mvmtvr", {
 
     //Keyboard controls
     document.addEventListener('keydown', event => {
-      
+
+      sound_bgm.components.sound.pauseSound();
+      sound_bgm.components.sound.playSound();
+
         if (event.code === 'ArrowLeft') {
           //rotate snake counter-clockwise
           data.angle += data.rotateSpeed
           data.headmovement.object3D.rotation.z = data.angle
+
+          
         }
         if (event.code === 'ArrowRight') {
           //rotate snake counter-clockwise
