@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Snake VR 🐍</title>
+	<title>SnakeVR (🐍🥽)</title>
 <link rel="manifest" href="manifest.webmanifest">
 <script src="www/app.js" async></script>
 <script src="www/aframe.min.js"></script>
@@ -22,6 +22,7 @@
 		<!-- <a-asset-item id="pineapple" src="/assets/pineapple.glb"></a-asset-item>
 		<a-asset-item id="cherries" src="/assets/cherries.glb"></a-asset-item> -->
 	 
+		<img id="scales" src="/assets/scales.jpg">
 		<img id="sand" src="/assets/sand.jpg">
 		<img id="scales" src="/assets/scales.jpg">
 
@@ -74,10 +75,10 @@
 	></a-cylinder>
 
 	<a-entity id="sound-bgm" sound="src: #bgm; volume: 0.1; loop: true"></a-entity>
-	<a-entity id="sound-apple-crunch" sound="src: #apple-crunch; loop: false"></a-entity>
+	<a-entity id="sound-apple-crunch" sound="src: #apple-crunch"></a-entity>
 	
 	<a-text id="scoretext"  value="Score: " 
-			color="Brown" height="2" width="0.7" position="-0.2 1.7 -0.2"
+			color="Brown" height="2" width="0.7" position="-0.2 1.7 -0.8"
 			opacity="0.4">
 
 			<a-text id="showscore" value="0" 
@@ -86,7 +87,7 @@
 			opacity="0.6">
 			</a-text>
 	</a-text>
-<!--document.querySelector('#snake').getAttribute('bodyCount') -->
+
 	<a-entity 
 		id="VR-controls" 
 		mvmtvr="orbit: #player-wrapper; headmovement: #snake"
@@ -96,7 +97,7 @@
 	<a-entity id="player-wrapper" >
 		<a-sphere	
 			id="snake" 
-			src="assets/scales.jpg"
+			src="#scales"
 			radius="0.06" segments-width="3" segments-height="2" phi-length="90" phi-start="90" 
 			blending="none" bodyCount="0"
 			aabb-collider="objects: .fruit" data-aabb-collider-dynamic="true"
@@ -107,7 +108,7 @@
 	
 		<!-- class="ignore-ray" -->
 	<a-entity 
-		id="snakebodies" src="assets/scales.jpg" 
+		id="snakebodies" src="#scales" 
 		geometry-merger="preserveOriginal: false" 
 	></a-entity>
 		

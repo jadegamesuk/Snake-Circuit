@@ -31,7 +31,7 @@ AFRAME.registerComponent('score_and_body', {
               snakeBodyCount = Number(snakeBodyCount) + 1;
               document.querySelector('#snake').setAttribute('bodyCount', snakeBodyCount)
 
-              console.log("Snake Body Count: " + snakeBodyCount + " Snake Score: " + snakeScore);
+              //console.log("Snake Body Count: " + snakeBodyCount + " Snake Score: " + snakeScore);
 
               //increase snake speed
               document.querySelector('#VR-controls').getAttribute('mvmtvr')['movement'] += 0.0005 
